@@ -4413,6 +4413,7 @@ async def _async_namespace_lifecycle(kubeconfig: str) -> None:
             read_async_command_pod,
             description="Async command Pod did not start",
             accept=lambda current: current.status is not None and current.status.phase == "Running",
+            timeout=60.0,
         )
         async_command_pod = await _eventually_async(
             lambda: _read_and_replace_async(
