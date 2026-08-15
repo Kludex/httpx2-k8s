@@ -1,9 +1,8 @@
 # Errors, retries, and watches
 
-## API errors
+## Handle API errors
 
-Unsuccessful Kubernetes responses raise `APIError`. The exception retains the status code and the
-typed Kubernetes status details when the server supplies them:
+Kubernetes errors raise `APIError`:
 
 ```python
 from httpx2_k8s import APIError
@@ -15,16 +14,22 @@ except APIError as exc:
         print("namespace does not exist")
 ```
 
+The exception includes the HTTP status code and, when Kubernetes returns one, a typed Status
+object.
+
 ## Retries
 
-Safe `GET` and `HEAD` calls retry bounded throttling and transient control-plane responses by
-default. Mutating methods are not retried unless their HTTP method is explicitly enabled in a
-custom `RetryPolicy`. This avoids silently duplicating writes.
+Safe `GET` and `HEAD` requests retry throttling and temporary control-plane failures by default.
+The client honors `Retry-After` and uses bounded backoff.
+
+Mutating requests are not retried by default. This avoids accidentally performing the same write
+twice.
+
+Pass a custom `RetryPolicy` to change this behavior, or `retry_policy=None` to disable retries.
 
 ## Watches
 
-Watch methods yield `WatchEvent[T]` and `WatchBookmark`. Namespace and Pod helpers reconnect with
-the last resource version and can recover from an expired resource version by relisting.
+Watch methods yield typed events:
 
 ```python
 from httpx2_k8s import WatchBookmark, WatchEvent
@@ -36,5 +41,8 @@ for event in client.core_v1.watch_namespaced_pod("default", timeout_seconds=30):
         print(event.type, event.object.metadata.name)
 ```
 
-Incremental log and watch streams never retry after yielding data, preventing duplicated output
-after a mid-stream disconnect.
+Namespace and Pod watches reconnect with the last resource version. They can also recover from an
+expired resource version by listing again.
+
+Streams stop retrying after they yield data, so a reconnect cannot silently duplicate log lines or
+watch events.

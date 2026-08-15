@@ -1,8 +1,9 @@
-# httpx2-k8s documentation
+# httpx2-k8s
 
-`httpx2-k8s` is a strictly typed Kubernetes client built directly on HTTPX2. It keeps the useful
-shape of the Kubernetes API—groups, versions, resources, and subresources—without exposing a
-generated class for every HTTP verb.
+`httpx2-k8s` is a small, strictly typed Kubernetes client built on HTTPX2.
+
+It uses Pydantic models for Kubernetes objects and provides matching synchronous and asynchronous
+clients.
 
 ## Install
 
@@ -10,54 +11,68 @@ generated class for every HTTP verb.
 pip install httpx2-k8s
 ```
 
-Python 3.11 through 3.14 are supported.
+Python 3.11 and newer are supported.
 
-## Connect
+## Connect to Kubernetes
 
-Use the current kubeconfig context:
+The simplest way to start is with your current kubeconfig context:
 
 ```python
 from httpx2_k8s import KubeClient
 
 with KubeClient.from_kubeconfig() as client:
-    print(client.version().git_version)
+    version = client.version()
+    print(version.git_version)
 ```
 
-Select an explicit context when a machine has access to multiple clusters:
+You can select another context explicitly:
 
 ```python
-with KubeClient.from_kubeconfig(context="production-readonly") as client:
+with KubeClient.from_kubeconfig(context="development") as client:
     namespaces = client.core_v1.list_namespace()
 ```
 
-Inside Kubernetes, use the mounted service-account credentials:
+Inside a Pod, use the mounted service-account credentials:
 
 ```python
 with KubeClient.from_in_cluster() as client:
     pods = client.core_v1.list_namespaced_pod("default")
 ```
 
-Every client is a context manager. Closing it releases the HTTP/2 connection pool and any TLS
-resources owned by the client.
+## Create a resource
 
-## API layout
+Kubernetes objects are regular Pydantic models:
 
-Versioned facades follow the Kubernetes group and version:
+```python
+from httpx2_k8s import ConfigMap, KubeClient, ObjectMeta
 
-- `client.core_v1`
-- `client.apps_v1`
-- `client.autoscaling_v1` and `client.autoscaling_v2`
-- `client.admissionregistration_v1`
-- `client.storage_v1`
+config_map = ConfigMap(
+    metadata=ObjectMeta(name="application-settings"),
+    data={"mode": "production"},
+)
 
-The synchronous and asynchronous implementations have method-for-method parity. Use
-`AsyncKubeClient` when the surrounding application is asynchronous.
+with KubeClient.from_kubeconfig() as client:
+    created = client.core_v1.create_namespaced_config_map("default", config_map)
+    print(created.metadata.name)
+```
 
-## Start here
+The response has the same concrete type as the object you sent, including fields added by
+Kubernetes such as its UID and resource version.
 
-- [Core v1 resources](core-v1.md)
-- [Custom resources](custom-resources.md)
-- [Errors, retries, and watches](reliability.md)
+## Use the async client
 
-The project deliberately exposes strict models. If a Kubernetes extension is not modeled, use
-the typed custom-resource API or the `Unstructured` escape hatch instead of bypassing the client.
+`AsyncKubeClient` follows the same API:
+
+```python
+from httpx2_k8s import AsyncKubeClient
+
+async with AsyncKubeClient.from_kubeconfig() as client:
+    namespaces = await client.core_v1.list_namespace()
+    print(namespaces.items)
+```
+
+## Learn more
+
+- [Work with Core v1 resources](core-v1.md)
+- [Use custom resources](custom-resources.md)
+- [Handle errors, retries, and watches](reliability.md)

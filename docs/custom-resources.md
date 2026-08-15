@@ -1,12 +1,11 @@
 # Custom resources
 
-Use `CustomResource` when the schema is known. Its generic parameters keep `apiVersion` and `kind`
-literal, so callers cannot accidentally send one resource type to another endpoint.
+You can define a typed model for any Kubernetes custom resource.
 
 ```python
 from typing import Literal
 
-from httpx2_k8s import CustomResource, KubeModel, ObjectMeta
+from httpx2_k8s import CustomResource, KubeClient, KubeModel, ObjectMeta
 
 
 class WidgetSpec(KubeModel):
@@ -19,21 +18,25 @@ class Widget(CustomResource[Literal["example.dev/v1"], Literal["Widget"]]):
     spec: WidgetSpec
 
 
-widget = Widget(metadata=ObjectMeta(name="primary"), spec=WidgetSpec(size=3))
-created = client.custom_objects.create_namespaced_custom_object(
-    "example.dev",
-    "v1",
-    "default",
-    "widgets",
-    widget,
+widget = Widget(
+    metadata=ObjectMeta(name="primary"),
+    spec=WidgetSpec(size=3),
 )
+
+with KubeClient.from_kubeconfig() as client:
+    created = client.custom_objects.create_namespaced_custom_object(
+        "example.dev",
+        "v1",
+        "default",
+        "widgets",
+        widget,
+    )
 ```
 
-For list responses, pass `CustomResourceList[Widget]` as `response_model`. The `items` field is
-required and retains `list[Widget]` under strict type checking.
+The `api_version` and `kind` literals keep the resource type precise. Reads, lists, watches, and
+updates can return your `Widget` model instead of an untyped dictionary.
 
-Use `Unstructured` only when the schema is genuinely unknown. Extra fields remain available via
-Pydantic's `model_extra`; metadata still has a concrete `ObjectMeta` type.
+If you do not know the schema ahead of time, use `Unstructured`. It keeps typed Kubernetes
+metadata while allowing arbitrary extra fields.
 
-Cluster-scoped and namespaced operations both support create, read, replace, patch, server-side
-apply, list, watch, item deletion, and selector-based collection deletion.
+Both typed and unstructured custom resources support cluster-scoped and namespaced operations.

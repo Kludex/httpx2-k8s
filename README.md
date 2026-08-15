@@ -6,9 +6,6 @@ A small, strictly typed Kubernetes client for Python, built on
 It gives you synchronous and asynchronous clients, Pydantic models, and the familiar Kubernetes
 API groups—without generating a class for every operation.
 
-> [!NOTE]
-> This project is in alpha. The API may change before the first stable release.
-
 ## Installation
 
 ```console

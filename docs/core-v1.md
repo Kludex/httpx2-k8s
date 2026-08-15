@@ -1,8 +1,9 @@
 # Core v1 resources
 
-The Core v1 facade is available as `client.core_v1`. Resource names and namespaces are positional
-arguments; query controls such as selectors, pagination, field managers, and dry-run are keyword
-arguments.
+Core Kubernetes resources are available under `client.core_v1`.
+
+Methods follow Kubernetes resource names, so if you already know the Kubernetes API, they should
+look familiar.
 
 ## Create and read
 
@@ -17,19 +18,47 @@ with KubeClient.from_kubeconfig() as client:
             data={"mode": "production"},
         ),
     )
-    current = client.core_v1.read_namespaced_config_map(
-        created.metadata.name or "application-settings",
+
+    config_map = client.core_v1.read_namespaced_config_map(
+        "application-settings",
         "default",
     )
 ```
 
-Kubernetes response fields such as `resourceVersion`, `uid`, and status are parsed back into the
-same concrete model.
+Names and namespaces are positional arguments. Optional Kubernetes query parameters, such as
+selectors and dry-run controls, are keyword arguments.
 
-## Patch and apply
+## List resources
 
-Use `MergePatch` for a partial object update and `JsonPatch` when operation ordering or tests
-matter:
+List methods return typed list models:
+
+```python
+pods = client.core_v1.list_namespaced_pod(
+    "default",
+    label_selector="app=worker",
+)
+
+for pod in pods.items:
+    print(pod.metadata.name)
+```
+
+For large collections, use `iter_items` to follow Kubernetes continuation tokens:
+
+```python
+from httpx2_k8s import iter_items
+
+pods = iter_items(
+    lambda token: client.core_v1.list_namespaced_pod(
+        "default",
+        limit=100,
+        continue_token=token,
+    )
+)
+```
+
+## Update a resource
+
+Use `MergePatch` for a partial update:
 
 ```python
 from httpx2_k8s import MergePatch
@@ -42,30 +71,18 @@ updated = client.core_v1.patch_namespaced_config_map(
 )
 ```
 
-Typed `apply_*` methods send server-side apply payloads. Pass a stable field-manager name; use
-`force=True` only when taking ownership of fields is intentional.
+The client also supports JSON Patch, server-side apply, and ordinary replacement.
 
-## Lists and pagination
-
-List methods return concrete list models rather than untyped dictionaries:
+## Delete a resource
 
 ```python
-from httpx2_k8s import iter_items
-
-pods = iter_items(
-    lambda token: client.core_v1.list_namespaced_pod(
-        "default",
-        label_selector="app=worker",
-        limit=100,
-        continue_token=token,
-    )
+status = client.core_v1.delete_namespaced_config_map(
+    "application-settings",
+    "default",
 )
+
+print(status.status)
 ```
 
-`iter_pages` preserves page metadata. Async applications use `aiter_items` and `aiter_pages`.
-
-## Subresources
-
-Status, Scale, logs, exec, attach, proxy, port-forward, ephemeral containers, and Pod resize are
-explicit operations. This prevents a normal resource update from being confused with a
-subresource update and keeps each wire response strictly typed.
+Special Kubernetes endpoints—such as status, logs, exec, attach, proxy, and port forwarding—have
+explicit typed methods too.
