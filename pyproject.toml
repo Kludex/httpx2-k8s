@@ -54,7 +54,6 @@ packages = ["src/httpx2_k8s"]
 
 [tool.hatch.build.targets.sdist]
 include = [
-    "/CHANGELOG.md",
     "/LICENSE",
     "/README.md",
     "/docs",

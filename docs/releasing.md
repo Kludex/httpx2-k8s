@@ -6,11 +6,10 @@ token stored in the repository.
 
 ## Prepare a release
 
-1. Move the relevant entries in `CHANGELOG.md` from `Unreleased` to the target version and date.
-2. Run the fast suite, strict type checker, formatter, linter, distribution build, and publish
+1. Run the fast suite, strict type checker, formatter, linter, distribution build, and publish
    dry-run.
-3. Merge the release commit after CI and the K3s matrix pass.
-4. Create a GitHub Release with a `vX.Y.Z` tag pointing to that commit, then publish the release.
+2. Merge the release commit after CI and the K3s matrix pass.
+3. Create a GitHub Release with a `vX.Y.Z` tag pointing to that commit, then publish the release.
 
 Publishing the GitHub Release starts the workflow. `uv-dynamic-versioning` derives the package
 version from its tag, the workflow verifies the resolved version, builds from the tagged source,
