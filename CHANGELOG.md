@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-08-15
+
 ### Added
 
 - Strictly typed synchronous and asynchronous Kubernetes clients built on HTTPX2.
@@ -16,3 +18,6 @@ All notable changes to this project are documented in this file. The format foll
   real K3s compatibility matrix spanning Kubernetes 1.31 through 1.36.
 - Pyrefly strict checking, runnable documentation examples, distribution checks, and trusted
   publishing automation.
+
+[Unreleased]: https://github.com/Kludex/httpx2-k8s/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/Kludex/httpx2-k8s/releases/tag/v0.1.0
