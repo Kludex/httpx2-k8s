@@ -4709,7 +4709,7 @@ async def test_namespace_lifecycle_against_real_k3s(monkeypatch: pytest.MonkeyPa
     exec_calls: list[list[str]] = []
     async_exec_calls: list[list[str]] = []
     with (
-        K3SContainer(K3S_IMAGE) as k3s,
+        K3SContainer(K3S_IMAGE, enable_cgroup_mount=False) as k3s,
         KubeClient.from_kubeconfig_yaml(
             _rotating_exec_kubeconfig(k3s.config_yaml(), monkeypatch, exec_calls),
             timeout=60,
