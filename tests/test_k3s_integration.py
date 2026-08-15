@@ -287,7 +287,7 @@ def _eventually(
             if accept is None or accept(result):
                 return result
             if time.monotonic() >= deadline:
-                raise AssertionError(description)
+                raise AssertionError(f"{description}: last result was {result!r}")
         time.sleep(0.1)
 
 
@@ -312,7 +312,7 @@ async def _eventually_async(
             if accept is None or accept(result):
                 return result
             if time.monotonic() >= deadline:
-                raise AssertionError(description)
+                raise AssertionError(f"{description}: last result was {result!r}")
         await anyio.sleep(0.1)
 
 
