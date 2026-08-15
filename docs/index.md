@@ -58,7 +58,6 @@ The synchronous and asynchronous implementations have method-for-method parity. 
 - [Core v1 resources](core-v1.md)
 - [Custom resources](custom-resources.md)
 - [Errors, retries, and watches](reliability.md)
-- [Runnable ConfigMap lifecycle](../examples/config_map_lifecycle.py)
 
 The project deliberately exposes strict models. If a Kubernetes extension is not modeled, use
 the typed custom-resource API or the `Unstructured` escape hatch instead of bypassing the client.
