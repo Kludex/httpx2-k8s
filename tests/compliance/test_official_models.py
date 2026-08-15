@@ -6,7 +6,7 @@ import types
 from datetime import datetime
 from functools import reduce
 from pathlib import Path
-from typing import Annotated, Literal, cast, get_args, get_origin
+from typing import Annotated, Literal, Union, cast, get_args, get_origin
 
 import pytest
 from pydantic import BaseModel, JsonValue
@@ -167,7 +167,7 @@ def _actual_type(annotation: object) -> str:
         _actual_type(arguments[0])
         if origin is Annotated
         else _union(tuple(_actual_type(item) for item in arguments))
-        if origin in (types.UnionType,)
+        if origin in (types.UnionType, Union)
         else f"Literal[{', '.join(repr(value) for value in arguments)}]"
         if origin is Literal
         else f"list[{_actual_type(arguments[0])}]"
@@ -199,7 +199,7 @@ def _sample_value(annotation: object, stack: frozenset[type[BaseModel]]) -> obje
         _sample_value(arguments[0], stack)
         if origin is Annotated
         else _sample_value(selected, stack)
-        if origin is types.UnionType
+        if origin in (types.UnionType, Union)
         else arguments[0]
         if origin is Literal
         else cast(list[object], [])

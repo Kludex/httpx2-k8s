@@ -10,7 +10,7 @@ from collections import Counter
 from collections.abc import Mapping
 from datetime import datetime
 from pathlib import Path
-from typing import Annotated, Literal, TypedDict, cast, get_args, get_origin
+from typing import Annotated, Literal, TypedDict, Union, cast, get_args, get_origin
 
 from pydantic import JsonValue
 
@@ -183,7 +183,7 @@ def _annotation_type(annotation: object) -> str:
         else _union(
             tuple(_annotation_type(item) for item in arguments if item is not types.NoneType)
         )
-        if origin is types.UnionType
+        if origin in (types.UnionType, Union)
         else f"Literal[{', '.join(repr(value) for value in arguments)}]"
         if origin is Literal
         else f"list[{_annotation_type(arguments[0])}]"
