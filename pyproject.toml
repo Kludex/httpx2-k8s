@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "uv-dynamic-versioning==0.14.0"]
 build-backend = "hatchling.build"
 
 [project]
 name = "httpx2-k8s"
-version = "0.1.0"
+dynamic = ["version"]
 description = "A small, strictly typed Kubernetes client built on HTTPX2"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -29,6 +29,14 @@ dependencies = [
     "pyyaml>=6.0,<7",
     "typing-extensions>=4.14,<5",
 ]
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "pep440"
+fallback-version = "0.1.0"
 
 [dependency-groups]
 dev = [

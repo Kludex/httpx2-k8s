@@ -671,7 +671,6 @@ wheels = [
 
 [[package]]
 name = "httpx2-k8s"
-version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "httpx2", extra = ["http2", "ws"] },

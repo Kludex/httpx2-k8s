@@ -1,9 +1,8 @@
-name: Release
+name: Publish
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -13,15 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          fetch-depth: 0
       - uses: astral-sh/setup-uv@v7
         with:
           python-version: "3.14"
           enable-cache: true
       - run: uv sync --frozen
-      - name: Validate tag and package versions
-        run: |
-          PACKAGE_VERSION="$(uv run python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
-          test "v${PACKAGE_VERSION}" = "${GITHUB_REF_NAME}"
+      - name: Validate release version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: test "v$(uvx uv-dynamic-versioning==0.14.0)" = "${RELEASE_TAG}"
       - run: uv run pytest -m "not integration"
       - run: uv run pyrefly check
       - run: uv run ruff format --check .
