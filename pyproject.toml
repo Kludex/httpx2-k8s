@@ -50,7 +50,6 @@ include = [
     "/LICENSE",
     "/README.md",
     "/docs",
-    "/examples",
     "/pyproject.toml",
     "/src",
 ]
@@ -72,7 +71,7 @@ skip_covered = true
 
 [tool.pyrefly]
 preset = "strict"
-project-includes = ["src", "tests", "examples"]
+project-includes = ["src", "tests"]
 search-path = ["src", "."]
 python-version = "3.11"
 

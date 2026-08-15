@@ -30,7 +30,7 @@ def iter_pages(
 ) -> Iterator[PageT]:
     """Yield pages until Kubernetes returns an empty continuation token."""
     token = continue_token
-    seen_tokens = {token} if token else set()
+    seen_tokens: set[str] = {token} if token else set()
     while True:
         page = fetch_page(token)
         yield page
@@ -62,7 +62,7 @@ async def aiter_pages(
 ) -> AsyncIterator[PageT]:
     """Yield asynchronously fetched pages until the continuation token is empty."""
     token = continue_token
-    seen_tokens = {token} if token else set()
+    seen_tokens: set[str] = {token} if token else set()
     while True:
         page = await fetch_page(token)
         yield page

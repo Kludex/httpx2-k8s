@@ -14,7 +14,6 @@ TYPED_FILES = tuple(
         (
             *(PROJECT_ROOT / "src").rglob("*.py"),
             *(PROJECT_ROOT / "tests").rglob("*.py"),
-            *(PROJECT_ROOT / "examples").rglob("*.py"),
         )
     )
 )
