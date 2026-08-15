@@ -233,8 +233,6 @@ CI runs that public-API lifecycle against pinned K3s v1.31.13, v1.32.9, v1.33.3,
 v1.35.5, and v1.36.1 images.
 Set `K3S_IMAGE` to one of those image tags to select a matrix member locally.
 
-See `TODO.local.md` for the implementation roadmap and completion criteria.
-
 The longer-form public documentation starts at [`docs/index.md`](docs/index.md). A runnable,
 strictly typed lifecycle is available in
 [`examples/config_map_lifecycle.py`](examples/config_map_lifecycle.py).
