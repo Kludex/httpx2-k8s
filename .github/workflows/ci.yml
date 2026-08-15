@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run pytest -m "not integration"
+
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run pyrefly check
+      - run: uv run ruff check .
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv build --no-sources --clear
+      - run: uv publish --dry-run --trusted-publishing never dist/*
+      - name: Install and import the built wheel
+        run: |
+          uv venv "$RUNNER_TEMP/package-check"
+          uv pip install --python "$RUNNER_TEMP/package-check/bin/python" dist/*.whl
+          "$RUNNER_TEMP/package-check/bin/python" -c "from httpx2_k8s import AsyncKubeClient, KubeClient, Namespace; assert AsyncKubeClient and KubeClient and Namespace"
+
+  k3s:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        k3s-image:
+          - rancher/k3s:v1.31.13-k3s1
+          - rancher/k3s:v1.32.9-k3s1
+          - rancher/k3s:v1.33.3-k3s1
+          - rancher/k3s:v1.34.10-k3s1
+          - rancher/k3s:v1.35.5-k3s1
+          - rancher/k3s:v1.36.1-k3s1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv run pytest
+        env:
+          RUN_K3S: "1"
+          K3S_IMAGE: ${{ matrix.k3s-image }}

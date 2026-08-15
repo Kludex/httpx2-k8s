@@ -1,0 +1,1 @@
+"""Typed Kubernetes Autoscaling APIs."""

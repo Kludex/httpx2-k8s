@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+          enable-cache: true
+      - run: uv sync --frozen
+      - name: Validate tag and package versions
+        run: |
+          PACKAGE_VERSION="$(uv run python -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
+          test "v${PACKAGE_VERSION}" = "${GITHUB_REF_NAME}"
+      - run: uv run pytest -m "not integration"
+      - run: uv run pyrefly check
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+      - run: uv build --no-sources --clear
+      - run: uv publish --dry-run --trusted-publishing never dist/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-distributions
+          path: dist/
+      - uses: astral-sh/setup-uv@v7
+      - run: uv publish --trusted-publishing always dist/*
