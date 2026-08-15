@@ -186,6 +186,8 @@ from httpx2_k8s import (
     aiter_items,
     iter_items,
 )
+from httpx2_k8s._official_api import OfficialOperation
+from httpx2_k8s.operations import OFFICIAL_OPERATIONS
 
 pytestmark = [
     pytest.mark.integration,
@@ -195,6 +197,80 @@ pytestmark = [
 K3S_IMAGE = os.getenv("K3S_IMAGE", "rancher/k3s:v1.36.1-k3s1")
 K3S_VERSION = K3S_IMAGE.rsplit(":", 1)[1].split("-k3s", 1)[0]
 K3S_MINOR = int(K3S_VERSION.split(".")[1])
+
+
+def _operation_key(operation: OfficialOperation) -> str:
+    return operation.key
+
+
+READ_ONLY_API_OPERATIONS = tuple(
+    {
+        operation.api: operation
+        for operation in sorted(OFFICIAL_OPERATIONS.values(), key=_operation_key)
+        if operation.method == "GET"
+        and operation.action == "list"
+        and operation.streaming is None
+        and all(
+            parameter.location != "path" or parameter.wire_name == "namespace"
+            for parameter in operation.parameters
+        )
+        and any(version.startswith(f"v1.{K3S_MINOR}.") for version in operation.kubernetes_versions)
+    }.values()
+)
+
+
+def _served_group_version(operation: OfficialOperation) -> str:
+    return (
+        cast(str, operation.version)
+        if not operation.group
+        else f"{operation.group}/{operation.version}"
+    )
+
+
+def _smoke_arguments(operation: OfficialOperation, namespace: str) -> dict[str, object]:
+    return {
+        parameter.python_name: namespace
+        for parameter in operation.parameters
+        if parameter.location == "path"
+    }
+
+
+def _smoke_sync_api(client: KubeClient, operation: OfficialOperation, namespace: str) -> object:
+    api = getattr(client, operation.client_property)
+    method = cast(Callable[..., object], getattr(api, operation.method_name))
+    return method(**_smoke_arguments(operation, namespace))
+
+
+async def _smoke_async_api(
+    client: AsyncKubeClient, operation: OfficialOperation, namespace: str
+) -> object:
+    api = getattr(client, operation.client_property)
+    method = cast(Callable[..., Awaitable[object]], getattr(api, operation.method_name))
+    return await method(**_smoke_arguments(operation, namespace))
+
+
+def _smoke_every_served_sync_api(
+    client: KubeClient, served: frozenset[str], namespace: str
+) -> tuple[object, ...]:
+    return tuple(
+        _smoke_sync_api(client, operation, namespace)
+        for operation in READ_ONLY_API_OPERATIONS
+        if _served_group_version(operation) in served
+    )
+
+
+async def _smoke_every_served_async_api(
+    client: AsyncKubeClient,
+    served: frozenset[str],
+    namespace: str,
+) -> tuple[object, ...]:
+    return tuple(
+        [
+            await _smoke_async_api(client, operation, namespace)
+            for operation in READ_ONLY_API_OPERATIONS
+            if _served_group_version(operation) in served
+        ]
+    )
 
 
 def _receive_forwarded_response(forward: PortForwardSession) -> bytes:
@@ -498,6 +574,23 @@ async def _async_namespace_lifecycle(kubeconfig: str) -> None:
         assert "v1" in api_versions.versions
         api_groups = await client.discovery.api_groups()
         assert "apps" in {group.name for group in api_groups.groups}
+        served_api_versions = frozenset(
+            (
+                *api_versions.versions,
+                *(
+                    version.group_version
+                    for group in api_groups.groups
+                    for version in group.versions
+                ),
+            )
+        )
+        async_smoke_results = await _smoke_every_served_async_api(
+            client, served_api_versions, "httpx2-k8s-async"
+        )
+        assert len(async_smoke_results) == sum(
+            _served_group_version(operation) in served_api_versions
+            for operation in READ_ONLY_API_OPERATIONS
+        )
         apps_group = await client.discovery.api_group("apps")
         assert apps_group.preferred_version is not None
         assert apps_group.preferred_version.version == "v1"
@@ -4733,6 +4826,16 @@ async def test_namespace_lifecycle_against_real_k3s(monkeypatch: pytest.MonkeyPa
         assert "v1" in api_versions.versions
         api_groups = client.discovery.api_groups()
         assert "apps" in {group.name for group in api_groups.groups}
+        served_api_versions = frozenset(
+            (
+                *api_versions.versions,
+                *(
+                    version.group_version
+                    for group in api_groups.groups
+                    for version in group.versions
+                ),
+            )
+        )
         apps_group = client.discovery.api_group("apps")
         assert apps_group.preferred_version is not None
         assert apps_group.preferred_version.group_version == "apps/v1"
@@ -4761,6 +4864,13 @@ async def test_namespace_lifecycle_against_real_k3s(monkeypatch: pytest.MonkeyPa
             )
         )
         assert created.metadata.name == "httpx2-k8s-integration"
+        sync_smoke_results = _smoke_every_served_sync_api(
+            client, served_api_versions, "httpx2-k8s-integration"
+        )
+        assert len(sync_smoke_results) == sum(
+            _served_group_version(operation) in served_api_versions
+            for operation in READ_ONLY_API_OPERATIONS
+        )
         created = client.core_v1.replace_namespace(
             "httpx2-k8s-integration",
             created,

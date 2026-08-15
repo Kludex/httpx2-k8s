@@ -62,8 +62,8 @@ class _ExecConfig(_ConfigModel):
         "client.authentication.k8s.io/v1", "client.authentication.k8s.io/v1beta1"
     ] = Field(alias="apiVersion")
     command: str
-    args: list[str] = Field(default_factory=list[str])
-    env: list[_ExecEnv] = Field(default_factory=list[_ExecEnv])
+    args: list[str] | None = Field(default_factory=list[str])
+    env: list[_ExecEnv] | None = Field(default_factory=list[_ExecEnv])
     interactive_mode: Literal["Never", "IfAvailable", "Always"] | None = Field(
         default=None, alias="interactiveMode"
     )
@@ -308,11 +308,11 @@ class _ExecCredentialProvider:
             "spec": spec,
         }
         environment = dict(os.environ)
-        environment.update({entry.name: entry.value for entry in config.env})
+        environment.update({entry.name: entry.value for entry in config.env or ()})
         environment["KUBERNETES_EXEC_INFO"] = json.dumps(exec_info, separators=(",", ":"))
         try:
             completed = subprocess.run(
-                [config.command, *config.args],
+                [config.command, *(config.args or ())],
                 cwd=self._user_base,
                 env=environment,
                 stdin=None if interactive else subprocess.DEVNULL,

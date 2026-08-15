@@ -1,0 +1,59 @@
+{
+  "inventory_sha256": "863f440550f501f1eb6c0c389c6bc00773ca41a9d9964383485120c13594dd90",
+  "versions": [
+    {
+      "api_module_count": 65,
+      "kubernetes_tag": "v1.31.0",
+      "operation_count": 876,
+      "public_method_count": 876,
+      "python_client": "31.0.0",
+      "wheel": "kubernetes-31.0.0-py2.py3-none-any.whl",
+      "wheel_sha256": "bf141e2d380c8520eada8b351f4e319ffee9636328c137aa432bc486ca1200e1"
+    },
+    {
+      "api_module_count": 67,
+      "kubernetes_tag": "v1.32.0",
+      "operation_count": 909,
+      "public_method_count": 909,
+      "python_client": "32.0.1",
+      "wheel": "kubernetes-32.0.1-py2.py3-none-any.whl",
+      "wheel_sha256": "35282ab8493b938b08ab5526c7ce66588232df00ef5e1dbe88a419107dc10998"
+    },
+    {
+      "api_module_count": 64,
+      "kubernetes_tag": "v1.33.0",
+      "operation_count": 871,
+      "public_method_count": 871,
+      "python_client": "33.1.0",
+      "wheel": "kubernetes-33.1.0-py2.py3-none-any.whl",
+      "wheel_sha256": "544de42b24b64287f7e0aa9513c93cb503f7f40eea39b20f66810011a86eabc5"
+    },
+    {
+      "api_module_count": 65,
+      "kubernetes_tag": "v1.34.0",
+      "operation_count": 887,
+      "public_method_count": 887,
+      "python_client": "34.1.0",
+      "wheel": "kubernetes-34.1.0-py2.py3-none-any.whl",
+      "wheel_sha256": "bffba2272534e224e6a7a74d582deb0b545b7c9879d2cd9e4aae9481d1f2cc2a"
+    },
+    {
+      "api_module_count": 65,
+      "kubernetes_tag": "v1.35.0",
+      "operation_count": 891,
+      "public_method_count": 891,
+      "python_client": "35.0.0",
+      "wheel": "kubernetes-35.0.0-py2.py3-none-any.whl",
+      "wheel_sha256": "39e2b33b46e5834ef6c3985ebfe2047ab39135d41de51ce7641a7ca5b372a13d"
+    },
+    {
+      "api_module_count": 65,
+      "kubernetes_tag": "v1.36.0",
+      "operation_count": 936,
+      "public_method_count": 936,
+      "python_client": "36.0.3",
+      "wheel": "kubernetes-36.0.3-py2.py3-none-any.whl",
+      "wheel_sha256": "8fde9241c4b298e6374a069dcf728359b4e72c2fb29489a975ba4e1c047cf10f"
+    }
+  ]
+}

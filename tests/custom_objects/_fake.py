@@ -38,11 +38,11 @@ class FakeCustomObjectsAPI:
         if parts[3] == "namespaces":
             namespace = parts[4]
             plural = parts[5]
-            name = parts[6] if len(parts) == 7 else None
+            name = parts[6] if len(parts) >= 7 else None
         else:
             namespace = ""
             plural = parts[3]
-            name = parts[4] if len(parts) == 5 else None
+            name = parts[4] if len(parts) >= 5 else None
 
         if request.method == "POST":
             body = cast(dict[str, object], json.loads(request.content))

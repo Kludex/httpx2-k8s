@@ -31,7 +31,16 @@ jobs:
           enable-cache: true
       - run: uv sync --frozen
       - run: uv run pyrefly check
+      - run: uv run ruff format --check .
       - run: uv run ruff check .
+      - run: uv run python scripts/compliance_report.py --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kubernetes-api-compliance
+          path: |
+            compliance/report.json
+            docs/api-coverage.md
+          if-no-files-found: error
 
   package:
     runs-on: ubuntu-latest
@@ -48,7 +57,7 @@ jobs:
         run: |
           uv venv "$RUNNER_TEMP/package-check"
           uv pip install --python "$RUNNER_TEMP/package-check/bin/python" dist/*.whl
-          "$RUNNER_TEMP/package-check/bin/python" -c "from httpx2_k8s import AsyncKubeClient, KubeClient, Namespace; assert AsyncKubeClient and KubeClient and Namespace"
+          "$RUNNER_TEMP/package-check/bin/python" scripts/wheel_compliance.py
 
   k3s:
     runs-on: ubuntu-latest
@@ -73,3 +82,23 @@ jobs:
         env:
           RUN_K3S: "1"
           K3S_IMAGE: ${{ matrix.k3s-image }}
+
+  upstream-kube-apiserver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+          enable-cache: true
+      - uses: helm/kind-action@v1
+        with:
+          version: v0.32.0
+          node_image: kindest/node:v1.36.1@sha256:3489c7674813ba5d8b1a9977baea8a6e553784dab7b84759d1014dbd78f7ebd5
+          cluster_name: httpx2-k8s
+          config: .github/kind.yaml
+      - run: uv sync --frozen
+      - run: uv run pytest --no-cov tests/test_upstream_integration.py
+        env:
+          RUN_UPSTREAM: "1"
+          UPSTREAM_KUBERNETES_TAG: "v1.36.0"

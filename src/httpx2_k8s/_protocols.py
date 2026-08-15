@@ -2,20 +2,33 @@ from __future__ import annotations
 
 from collections.abc import AsyncIterator, Awaitable, Callable, Iterator, Mapping
 from contextlib import AbstractAsyncContextManager, AbstractContextManager
-from typing import Protocol, TypeVar
+from typing import Protocol, TypeAlias, TypeVar, runtime_checkable
 
 import httpx2
-from pydantic import BaseModel
+from pydantic import BaseModel, JsonValue, TypeAdapter
 
 from httpx2_k8s._models import ListMeta
 from httpx2_k8s._watch import WatchBookmark, WatchEvent
 
 ModelT = TypeVar("ModelT", bound=BaseModel)
 ResourceT = TypeVar("ResourceT", bound=BaseModel)
+QueryValue: TypeAlias = str | int | bool
 
 
+@runtime_checkable
 class WireBody(Protocol):
     def wire_json(self) -> bytes: ...
+
+
+RequestBody: TypeAlias = WireBody | JsonValue
+_JSON_VALUE_ADAPTER = TypeAdapter(JsonValue)
+
+
+def serialize_request_body(body: RequestBody) -> bytes:
+    """Serialize typed models and officially free-form JSON patch bodies."""
+    if isinstance(body, WireBody):
+        return body.wire_json()
+    return _JSON_VALUE_ADAPTER.dump_json(body)
 
 
 class WatchPage(Protocol):
@@ -52,8 +65,8 @@ class SyncKubeClientProtocol(Protocol):
         path: str,
         *,
         response_model: type[ModelT],
-        params: dict[str, str | int] | None = None,
-        body: WireBody | None = None,
+        params: dict[str, QueryValue] | None = None,
+        body: RequestBody | None = None,
         content_type: str = "application/json",
     ) -> ModelT: ...
 
@@ -62,7 +75,7 @@ class SyncKubeClientProtocol(Protocol):
         method: str,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
     ) -> str: ...
 
     def request_raw(
@@ -70,7 +83,7 @@ class SyncKubeClientProtocol(Protocol):
         method: str,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         content: bytes | str | None = None,
         headers: Mapping[str, str] | None = None,
         timeout: float | None = None,
@@ -80,7 +93,7 @@ class SyncKubeClientProtocol(Protocol):
         self,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         timeout: float | None = None,
     ) -> Iterator[str]: ...
 
@@ -98,7 +111,7 @@ class SyncKubeClientProtocol(Protocol):
         path: str,
         *,
         response_model: type[ResourceT],
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         resource_version: str | None = None,
         timeout_seconds: int | None = None,
         allow_bookmarks: bool = True,
@@ -116,8 +129,8 @@ class AsyncKubeClientProtocol(Protocol):
         path: str,
         *,
         response_model: type[ModelT],
-        params: dict[str, str | int] | None = None,
-        body: WireBody | None = None,
+        params: dict[str, QueryValue] | None = None,
+        body: RequestBody | None = None,
         content_type: str = "application/json",
     ) -> ModelT: ...
 
@@ -126,7 +139,7 @@ class AsyncKubeClientProtocol(Protocol):
         method: str,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
     ) -> str: ...
 
     async def request_raw(
@@ -134,7 +147,7 @@ class AsyncKubeClientProtocol(Protocol):
         method: str,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         content: bytes | str | None = None,
         headers: Mapping[str, str] | None = None,
         timeout: float | None = None,
@@ -144,7 +157,7 @@ class AsyncKubeClientProtocol(Protocol):
         self,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         timeout: float | None = None,
     ) -> AsyncIterator[str]: ...
 
@@ -162,7 +175,7 @@ class AsyncKubeClientProtocol(Protocol):
         path: str,
         *,
         response_model: type[ResourceT],
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         resource_version: str | None = None,
         timeout_seconds: int | None = None,
         allow_bookmarks: bool = True,

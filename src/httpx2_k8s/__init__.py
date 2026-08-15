@@ -352,7 +352,11 @@ from httpx2_k8s.batch.v1 import AsyncBatchV1API, BatchV1API
 from httpx2_k8s.certificates.v1 import AsyncCertificatesV1API, CertificatesV1API
 from httpx2_k8s.coordination.v1 import AsyncCoordinationV1API, CoordinationV1API
 from httpx2_k8s.core.v1 import AsyncCoreV1API, CoreV1API
-from httpx2_k8s.custom_objects import AsyncCustomObjectsAPI, CustomObjectsAPI
+from httpx2_k8s.custom_objects import (
+    AsyncCustomObjectsAPI,
+    CustomObjectsAPI,
+    CustomObjectSubresource,
+)
 from httpx2_k8s.discovery import AsyncDiscoveryAPI, DiscoveryAPI
 from httpx2_k8s.discovery.v1 import AsyncDiscoveryV1API, DiscoveryV1API
 from httpx2_k8s.networking.v1 import AsyncNetworkingV1API, NetworkingV1API
@@ -456,6 +460,7 @@ __all__ = [
     "CronJobSpec",
     "CronJobStatus",
     "CrossVersionObjectReference",
+    "CustomObjectSubresource",
     "CustomObjectsAPI",
     "CustomResource",
     "CustomResourceList",

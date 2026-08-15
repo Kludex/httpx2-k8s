@@ -28,8 +28,14 @@ jobs:
       - run: uv run pyrefly check
       - run: uv run ruff format --check .
       - run: uv run ruff check .
+      - run: uv run python scripts/compliance_report.py --check
       - run: uv build --no-sources --clear
       - run: uv publish --dry-run --trusted-publishing never dist/*
+      - name: Verify the built wheel against the official inventory
+        run: |
+          uv venv "$RUNNER_TEMP/package-check"
+          uv pip install --python "$RUNNER_TEMP/package-check/bin/python" dist/*.whl
+          "$RUNNER_TEMP/package-check/bin/python" scripts/wheel_compliance.py
       - uses: actions/upload-artifact@v4
         with:
           name: python-distributions

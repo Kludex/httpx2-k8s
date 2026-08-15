@@ -1,0 +1,48 @@
+name: Kubernetes upstream drift
+
+on:
+  schedule:
+    - cron: "17 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+          enable-cache: true
+      - run: uv sync --frozen
+      - id: drift
+        run: uv run python scripts/check_upstream_drift.py --update
+      - if: steps.drift.outputs.changed == 'true'
+        env:
+          KUBERNETES_TAG: ${{ steps.drift.outputs.kubernetes_tag }}
+        run: uv run python scripts/update_openapi.py --version "$KUBERNETES_TAG"
+      - if: steps.drift.outputs.changed == 'true'
+        run: uv run python scripts/update_python_client_inventory.py
+      - if: steps.drift.outputs.changed == 'true'
+        run: uv run python scripts/generate_official_models.py
+      - if: steps.drift.outputs.changed == 'true'
+        run: uv run python -m scripts.generate_official_apis
+      - if: steps.drift.outputs.changed == 'true'
+        run: uv run python scripts/compliance_report.py
+      - if: steps.drift.outputs.changed == 'true'
+        run: uv run pytest --no-cov tests/compliance
+      - if: steps.drift.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automated/kubernetes-api-update
+          delete-branch: true
+          title: Update the Kubernetes API baseline
+          body: |
+            Updates the pinned Kubernetes and official Python-client inventories.
+
+            The generated JSON and Markdown reports contain the exact operation, schema,
+            field, and sync/async parity diff for review.

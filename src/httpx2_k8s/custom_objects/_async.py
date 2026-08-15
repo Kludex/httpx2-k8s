@@ -8,6 +8,7 @@ from httpx2_k8s._models import DeleteOptions, JsonPatch, KubeModel, MergePatch
 from httpx2_k8s._patch import DryRun, patch_content_type, patch_params
 from httpx2_k8s._protocols import AsyncKubeClientProtocol, WatchPage
 from httpx2_k8s._watch import WatchBookmark, WatchEvent
+from httpx2_k8s.custom_objects._types import CustomObjectSubresource
 
 ResourceT = TypeVar("ResourceT", bound=KubeModel)
 ResponseT = TypeVar("ResponseT", bound=KubeModel)
@@ -53,6 +54,63 @@ class AsyncCustomObjectsAPI:
             "GET",
             f"{_collection_path(group, version, plural)}/{resource_name(name)}",
             response_model=response_model,
+        )
+
+    async def read_cluster_custom_object_subresource(
+        self,
+        group: str,
+        version: str,
+        plural: str,
+        name: str,
+        subresource: CustomObjectSubresource,
+        *,
+        response_model: type[ResponseT],
+    ) -> ResponseT:
+        """Read a typed custom-resource status or scale subresource."""
+        return await self._client.request(
+            "GET",
+            (f"{_collection_path(group, version, plural)}/{resource_name(name)}/{subresource}"),
+            response_model=response_model,
+        )
+
+    async def replace_cluster_custom_object_subresource(
+        self,
+        group: str,
+        version: str,
+        plural: str,
+        name: str,
+        subresource: CustomObjectSubresource,
+        body: ResourceT,
+    ) -> ResourceT:
+        """Replace a typed custom-resource status or scale subresource."""
+        return await self._client.request(
+            "PUT",
+            (f"{_collection_path(group, version, plural)}/{resource_name(name)}/{subresource}"),
+            response_model=type(body),
+            body=body,
+        )
+
+    async def patch_cluster_custom_object_subresource(
+        self,
+        group: str,
+        version: str,
+        plural: str,
+        name: str,
+        subresource: CustomObjectSubresource,
+        body: JsonPatch | MergePatch,
+        *,
+        response_model: type[ResponseT],
+        field_manager: str | None = None,
+        dry_run: DryRun | None = None,
+    ) -> ResponseT:
+        """Patch a typed custom-resource status or scale subresource."""
+        return await self._client.request(
+            "PATCH",
+            (f"{_collection_path(group, version, plural)}/{resource_name(name)}/{subresource}"),
+            response_model=response_model,
+            params=patch_params(field_manager=field_manager, dry_run=dry_run),
+            body=body,
+            content_type=patch_content_type(body),
         )
 
     async def replace_cluster_custom_object(
@@ -242,6 +300,75 @@ class AsyncCustomObjectsAPI:
                 f"{resource_name(name)}"
             ),
             response_model=response_model,
+        )
+
+    async def read_namespaced_custom_object_subresource(
+        self,
+        group: str,
+        version: str,
+        namespace: str,
+        plural: str,
+        name: str,
+        subresource: CustomObjectSubresource,
+        *,
+        response_model: type[ResponseT],
+    ) -> ResponseT:
+        """Read a typed namespaced custom-resource status or scale subresource."""
+        return await self._client.request(
+            "GET",
+            (
+                f"{_collection_path(group, version, plural, namespace=namespace)}/"
+                f"{resource_name(name)}/{subresource}"
+            ),
+            response_model=response_model,
+        )
+
+    async def replace_namespaced_custom_object_subresource(
+        self,
+        group: str,
+        version: str,
+        namespace: str,
+        plural: str,
+        name: str,
+        subresource: CustomObjectSubresource,
+        body: ResourceT,
+    ) -> ResourceT:
+        """Replace a typed namespaced custom-resource status or scale subresource."""
+        return await self._client.request(
+            "PUT",
+            (
+                f"{_collection_path(group, version, plural, namespace=namespace)}/"
+                f"{resource_name(name)}/{subresource}"
+            ),
+            response_model=type(body),
+            body=body,
+        )
+
+    async def patch_namespaced_custom_object_subresource(
+        self,
+        group: str,
+        version: str,
+        namespace: str,
+        plural: str,
+        name: str,
+        subresource: CustomObjectSubresource,
+        body: JsonPatch | MergePatch,
+        *,
+        response_model: type[ResponseT],
+        field_manager: str | None = None,
+        dry_run: DryRun | None = None,
+    ) -> ResponseT:
+        """Patch a typed namespaced custom-resource status or scale subresource."""
+        return await self._client.request(
+            "PATCH",
+            (
+                f"{_collection_path(group, version, plural, namespace=namespace)}/"
+                f"{resource_name(name)}/{subresource}"
+            ),
+            response_model=response_model,
+            params=patch_params(field_manager=field_manager, dry_run=dry_run),
+            body=body,
+            content_type=patch_content_type(body),
         )
 
     async def replace_namespaced_custom_object(

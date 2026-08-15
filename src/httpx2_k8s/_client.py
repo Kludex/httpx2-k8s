@@ -20,7 +20,14 @@ from httpx2_k8s._config import (
 )
 from httpx2_k8s._errors import APIError
 from httpx2_k8s._models import VersionInfo
-from httpx2_k8s._protocols import SyncWebSocketProtocol, WatchPage, WireBody
+from httpx2_k8s._official_clients import OfficialSyncClientAPIs
+from httpx2_k8s._protocols import (
+    QueryValue,
+    RequestBody,
+    SyncWebSocketProtocol,
+    WatchPage,
+    serialize_request_body,
+)
 from httpx2_k8s._retry import RetryPolicy
 from httpx2_k8s._watch import (
     ResourceT,
@@ -51,7 +58,7 @@ ModelT = TypeVar("ModelT", bound=BaseModel)
 DEFAULT_RETRY_POLICY = RetryPolicy()
 
 
-class KubeClient:
+class KubeClient(OfficialSyncClientAPIs):
     """A synchronous, strictly typed Kubernetes API client."""
 
     def __init__(
@@ -344,8 +351,8 @@ class KubeClient:
         path: str,
         *,
         response_model: type[ModelT],
-        params: dict[str, str | int] | None = None,
-        body: WireBody | None = None,
+        params: dict[str, QueryValue] | None = None,
+        body: RequestBody | None = None,
         content_type: str = "application/json",
     ) -> ModelT:
         """Send one Kubernetes JSON request and validate its response model."""
@@ -363,7 +370,7 @@ class KubeClient:
         method: str,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
     ) -> str:
         """Send one Kubernetes request and decode its successful response as text."""
         return self._request_response(method, path, params=params).text
@@ -373,7 +380,7 @@ class KubeClient:
         method: str,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         content: bytes | str | None = None,
         headers: Mapping[str, str] | None = None,
         timeout: float | None = None,
@@ -394,7 +401,7 @@ class KubeClient:
         self,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         timeout: float | None = None,
     ) -> Iterator[str]:
         """Stream response lines, retrying only before the first line is delivered."""
@@ -465,14 +472,14 @@ class KubeClient:
         method: str,
         path: str,
         *,
-        params: dict[str, str | int] | None = None,
-        body: WireBody | None = None,
+        params: dict[str, QueryValue] | None = None,
+        body: RequestBody | None = None,
         content_type: str = "application/json",
         raw_content: bytes | str | None = None,
         headers: Mapping[str, str] | None = None,
         timeout: float | None = None,
     ) -> httpx2.Response:
-        content = body.wire_json() if body is not None else raw_content
+        content = serialize_request_body(body) if body is not None else raw_content
         policy = self._retry_policy
         attempts = policy.max_attempts if policy is not None and policy.allows(method) else 1
         attempt = 0
@@ -518,7 +525,7 @@ class KubeClient:
         path: str,
         *,
         response_model: type[ResourceT],
-        params: dict[str, str | int] | None = None,
+        params: dict[str, QueryValue] | None = None,
         resource_version: str | None = None,
         timeout_seconds: int | None = None,
         allow_bookmarks: bool = True,

@@ -1,0 +1,2332 @@
+{
+  "versions": [
+    {
+      "commit": "9edcffcde5595e8a5b1a35f88c421764e575afce",
+      "kubernetes_tag": "v1.31.0",
+      "operation_count": 944,
+      "python_client": "31.0.0",
+      "schema_count": 635,
+      "swagger_sha256": "ac357350d9d00ee233ea9a172d7c868201ff405332fec8ffe0fda25dee3e41b4",
+      "v3_documents": [
+        {
+          "name": ".well-known__openid-configuration_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "d776f5a3b4924075c3105f6576a4167c56a9b31d94219e4eb304af17841f1c0c"
+        },
+        {
+          "name": "api__v1_openapi.json",
+          "operation_count": 245,
+          "schema_count": 239,
+          "sha256": "9774af2f5f5cdfbeb2557e5e1ec491341025f993639fbef912e2c7cbd97b21a2"
+        },
+        {
+          "name": "api_openapi.json",
+          "operation_count": 1,
+          "schema_count": 2,
+          "sha256": "5133552f7041355f7ca8267b0ad62b067e51be8191f8f1ad54e875f6536f5010"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1_openapi.json",
+          "operation_count": 40,
+          "schema_count": 45,
+          "sha256": "750245c054d440794634a7a3ee3e38e1d5dbd7089c2c40addf15278822f61647"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 36,
+          "sha256": "909f0b10f0398bc6554b06648ab8b016aefe49b3f3bca61aeebd9c8e4794e6b7"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 36,
+          "sha256": "dc558d764b61f8a399dc9576a0e8c6620d9d7e6f6fb762199dc89903285e33e9"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dc6c54d8c99e5909ff109974998538ecfb2031827c2d11863436f7a203af1522"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 40,
+          "sha256": "7fa74f9176dcac7202bb57a3b762a65eba602a16b331fd20863fea8efe8e3f2d"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "baf38ebd39bec67016c2da44ed239ccbf07c43869837ca56d25b8ef4d259bda8"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "0abf13bc3a8e73ef2eea08e6036e040dae06f23b49e26c8d4e59b2348a34a1a7"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9acdfcbc925ad6fa7c2563323aa0ce1f7eb309360cd53fa9f54ffd070e5447b5"
+        },
+        {
+          "name": "apis__apps__v1_openapi.json",
+          "operation_count": 77,
+          "schema_count": 157,
+          "sha256": "91c2ff75cfcb3f4f743bf08bda2d1b9c893a4987c792200df0364d6d52a9cdc9"
+        },
+        {
+          "name": "apis__apps_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c3fd555540caad353f7cc41f4e67e40b9ef7d5616588b7132d62e36d81a6846a"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1_openapi.json",
+          "operation_count": 3,
+          "schema_count": 13,
+          "sha256": "831399aa8914b0613850a88fdb959d1522580a051e51c09d71fce14cb675a292"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 2,
+          "schema_count": 10,
+          "sha256": "23db7d2ae6fdaefedd0dd8c4fad382323b136931e800fa9b5a379361595ee386"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1beta1_openapi.json",
+          "operation_count": 2,
+          "schema_count": 10,
+          "sha256": "0b390fd654faadca46be19e1635a6fa0950b132fd24fb8bde4a2ae5224f84882"
+        },
+        {
+          "name": "apis__authentication.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9885966ae17ed021309e2d42511e4b69080be05e358575c6763552c882398d9d"
+        },
+        {
+          "name": "apis__authorization.k8s.io__v1_openapi.json",
+          "operation_count": 5,
+          "schema_count": 24,
+          "sha256": "23745228bd876f58e36eed992797ed23ab9bdd0692cb14b107cb6f2017aa76bc"
+        },
+        {
+          "name": "apis__authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "7179307b29889697fd45128b99ed84e07321eed9d20491f559260cfac3886fd1"
+        },
+        {
+          "name": "apis__autoscaling__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 21,
+          "sha256": "a4d7187d9323af6fbd6d494d26a3dc82b6689f5e37a578b07c49d62acb930d03"
+        },
+        {
+          "name": "apis__autoscaling__v2_openapi.json",
+          "operation_count": 15,
+          "schema_count": 43,
+          "sha256": "c25e1630d2c6c18304dbe86de465f2e335e3ec7217663ae71987ff3fa25eb1cd"
+        },
+        {
+          "name": "apis__autoscaling_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "21dd30ad7b3539eed5f766e0bdb8707af2ab6f6785a887ec3a0f92e6738f118b"
+        },
+        {
+          "name": "apis__batch__v1_openapi.json",
+          "operation_count": 29,
+          "schema_count": 138,
+          "sha256": "96e05ba1bb75313062bab67cbbb783e68ef2d02732cfceb7c183447db0f1cffc"
+        },
+        {
+          "name": "apis__batch_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c9d5b55a1eb99cadf8ed53f032cb45a369b71e4a56137cff9621740cf8505d0c"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1_openapi.json",
+          "operation_count": 16,
+          "schema_count": 21,
+          "sha256": "3742a4f8414dd5406b68754417ac09c839dbfec0a56f4448e3dd95a2e657e7b1"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 19,
+          "sha256": "7a35ce28e557566a4793e57e928d2ea139ed8de58d349718c8c80813c811a151"
+        },
+        {
+          "name": "apis__certificates.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "de1b013c22ae5b7ae548e5273609b3b27018f83068a69d9c19a316b755058b4f"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "26b0c235df71625da0edfa9c0e90fd66483e3558b7c5d102a8650e640b7813b7"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "582e507bef9e881641290b5dde64e337880323c3ea046a35d580e74a1acad13d"
+        },
+        {
+          "name": "apis__coordination.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ebd405fc9982811805aba54b205295192ff10a2657be4202efa47f8baf249eb3"
+        },
+        {
+          "name": "apis__discovery.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 24,
+          "sha256": "b21cb43462abd4cb660b71bd14694d09e3d6890a1b4ad8b257bbac41ee1d341d"
+        },
+        {
+          "name": "apis__discovery.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ed1e6208224a2c6012c26df6e1644b6ed407c65311d993a33c1d97106d083bbd"
+        },
+        {
+          "name": "apis__events.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 22,
+          "sha256": "d72bb4a7519071d4076b652513f91d4ebcf42ca7ad84aae729fd3850e2ddd890"
+        },
+        {
+          "name": "apis__events.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "f95094d9216f45aca86f9344f0315ac7aa60175f36c4a06963b264205ec8e884"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io__v1_openapi.json",
+          "operation_count": 25,
+          "schema_count": 39,
+          "sha256": "db9a0b123f05076bf2ad8019333ada00b6d4efd80e74e1f86241fa4aa04b9a34"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io__v1beta3_openapi.json",
+          "operation_count": 25,
+          "schema_count": 39,
+          "sha256": "2cf704cb8d72f6b8e533e6f4718cfb97377bd0e4fe4fe283e394495b0e8acc38"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "fd9a67b7504bd7bc2d061913a68b8e347dce60fe6aa8dc3162c451257163af98"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "381ebabd7b12d0a118067325bf1b0d7794d1fc670a9870e88e0b0ffe1d611a8b"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "69fa06c16151c0f14d7daef296da70a22fac53bbd84401922c38b33493a274df"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1_openapi.json",
+          "operation_count": 35,
+          "schema_count": 46,
+          "sha256": "ace39bdac5c1c8dfea5ba1b5bbe7bd09363f8d866e8cb6cb8af73b211bc5dbd1"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 25,
+          "sha256": "5e0f034ad193a478f9661a2e0d7ab4d58096d808f08f17b679283430889ca0e7"
+        },
+        {
+          "name": "apis__networking.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3060f4ce09006a33349163f413f4c83aff85d6b4fc1ed0bc07e0f455d503e061"
+        },
+        {
+          "name": "apis__node.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 22,
+          "sha256": "c79df66aae494755365da2cd04208ed98446e8689affdb7787bdd4d1a14e77af"
+        },
+        {
+          "name": "apis__node.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "a71526de7d1abab4f61aba32dbf3a0e42ca1eee39f2a2cbe42a3a47946133843"
+        },
+        {
+          "name": "apis__policy__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 24,
+          "sha256": "11c7d16302e0d3aaad6486c7feadc3c105cd5ee917b23e8efa505e7e0b08cdfb"
+        },
+        {
+          "name": "apis__policy_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "52074d50fef7fc714e7cab626971597320f94ee14a31cfafd67033e32e4fb8cb"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io__v1_openapi.json",
+          "operation_count": 41,
+          "schema_count": 30,
+          "sha256": "c0e1b5b562046ef24d3c06e4fdf96bf62bbac0882b37626b69d7c92e2ae10ee3"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "15f461c99c4904cb084be11331ca59d5e042f9cf491fd1da9b04f340f8df68e6"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1alpha3_openapi.json",
+          "operation_count": 58,
+          "schema_count": 55,
+          "sha256": "95d607815c2539a7ea0add4e5de78813013e9928db56da15aaba37485e95a0c7"
+        },
+        {
+          "name": "apis__resource.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "19a5c7cff68dca2ce3933e0c79257cac76b99cdfd462838c5d62ea21a1d42577"
+        },
+        {
+          "name": "apis__scheduling.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "71c35246598c20c4313d4d7633b4b1fea6f07b24b8cba014700ce0f6a1970130"
+        },
+        {
+          "name": "apis__scheduling.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dd1139dfcaed8e8f73768e7ef57b25575fbd6b8eaae6fbfbb305f5b8a1133780"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1_openapi.json",
+          "operation_count": 51,
+          "schema_count": 69,
+          "sha256": "332d14d3b5c1057e2104e18da6a2880298e3cde292b4b28a51d970be8731a951"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "8a671ba75fa703a1812d95a894147adb72c0e8f2485e941e5da6b6d5bc561af0"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1beta1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "ad17227439dba73e720758d2455d5d481d95f71d9193f3a4a79f36e32d58b3de"
+        },
+        {
+          "name": "apis__storage.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9cf25959dd59c003609183375f830f41ace5cfb7cfac8747fd4312149b0233bf"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "013fbda87902521427f75e38b35c0a81d26fcb6d51d9e665620bb95477b988a8"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3f2485bf7bdd9c8922deab59d7bf8ab1db9e8d3dbac80ec9009fc4a24cc2d828"
+        },
+        {
+          "name": "apis_openapi.json",
+          "operation_count": 1,
+          "schema_count": 4,
+          "sha256": "a35becf993dbb081b28fe5afcdd9b5bf22ff70a8a83b1d773e8e541bb06810de"
+        },
+        {
+          "name": "logs_openapi.json",
+          "operation_count": 2,
+          "schema_count": 0,
+          "sha256": "6b263751854cd33af73aa5d3a753e8e406c9f32d60e8fa67af7c188141134bf7"
+        },
+        {
+          "name": "openid__v1__jwks_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "be0369fabc2dd2e26ddde8ffcc4829f0559c4f76841d96d154f76cb3ad2e95db"
+        },
+        {
+          "name": "version_openapi.json",
+          "operation_count": 1,
+          "schema_count": 1,
+          "sha256": "084885d9e823482d9ed68b4f46aa487da95dbb826584fb5d5db068c2da406182"
+        }
+      ]
+    },
+    {
+      "commit": "70d3cc986aa8221cd1dfb1121852688902d3bf53",
+      "kubernetes_tag": "v1.32.0",
+      "operation_count": 947,
+      "python_client": "32.0.1",
+      "schema_count": 638,
+      "swagger_sha256": "0ba99bb42a1cf0bd35959fe82965f4eec50d404221ca299e9ef79b900e15dc00",
+      "v3_documents": [
+        {
+          "name": ".well-known__openid-configuration_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "d776f5a3b4924075c3105f6576a4167c56a9b31d94219e4eb304af17841f1c0c"
+        },
+        {
+          "name": "api__v1_openapi.json",
+          "operation_count": 248,
+          "schema_count": 239,
+          "sha256": "e70786b2b36d53fa99dd72910f2ef82a12384abc8d28ce144ebc9899c32b109c"
+        },
+        {
+          "name": "api_openapi.json",
+          "operation_count": 1,
+          "schema_count": 2,
+          "sha256": "5133552f7041355f7ca8267b0ad62b067e51be8191f8f1ad54e875f6536f5010"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1_openapi.json",
+          "operation_count": 40,
+          "schema_count": 45,
+          "sha256": "3c3dbc0a05ac303bb29ba00f3ac6e108f563fc8647c38289919790b8981a8126"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 19,
+          "schema_count": 33,
+          "sha256": "e300c698e703fdcccb2776da5ea8b4cacd0d17a49a9275e6892da4e4dbda9bf4"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 36,
+          "sha256": "af923b0f4f81965a49df3638b1f62f53ec6398abb643da2f53ea15d96ca7d199"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dc6c54d8c99e5909ff109974998538ecfb2031827c2d11863436f7a203af1522"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 40,
+          "sha256": "53683c23f111cc794ee4a7045a48c749ceea54290e15af00d1c6ab6190e6da2e"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "baf38ebd39bec67016c2da44ed239ccbf07c43869837ca56d25b8ef4d259bda8"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "b2939c60c574227d3668c00acd4a775cb08c00d1884530e068e8de3a40d53ad8"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9acdfcbc925ad6fa7c2563323aa0ce1f7eb309360cd53fa9f54ffd070e5447b5"
+        },
+        {
+          "name": "apis__apps__v1_openapi.json",
+          "operation_count": 77,
+          "schema_count": 157,
+          "sha256": "ca3e54d3c12821353fa4c8aea2704d29ad1a216a142dbaefbab6ecea69457375"
+        },
+        {
+          "name": "apis__apps_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c3fd555540caad353f7cc41f4e67e40b9ef7d5616588b7132d62e36d81a6846a"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1_openapi.json",
+          "operation_count": 3,
+          "schema_count": 13,
+          "sha256": "cdeaa12db780e0b50d1edc547952997b2afc6c03087fa26c9b9e0da03ab49e8e"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1beta1_openapi.json",
+          "operation_count": 2,
+          "schema_count": 10,
+          "sha256": "b836b588f37e069e9115a1a22ae4ce6f4bb23d28ecb203cc89ff7ff097344c23"
+        },
+        {
+          "name": "apis__authentication.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9885966ae17ed021309e2d42511e4b69080be05e358575c6763552c882398d9d"
+        },
+        {
+          "name": "apis__authorization.k8s.io__v1_openapi.json",
+          "operation_count": 5,
+          "schema_count": 24,
+          "sha256": "12dd2152d3a24d5c3b7227a4b0d20e4308f8deb121368939b8f98affff7c5e92"
+        },
+        {
+          "name": "apis__authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "7179307b29889697fd45128b99ed84e07321eed9d20491f559260cfac3886fd1"
+        },
+        {
+          "name": "apis__autoscaling__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 21,
+          "sha256": "4eef107675046b9d39bfe36b8a84afc18f376f36ac562e82526506240902b183"
+        },
+        {
+          "name": "apis__autoscaling__v2_openapi.json",
+          "operation_count": 15,
+          "schema_count": 43,
+          "sha256": "56e5be885071fa09dbc915513fc2550b8c07305cfd222edeff689adbe15a1b37"
+        },
+        {
+          "name": "apis__autoscaling_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "21dd30ad7b3539eed5f766e0bdb8707af2ab6f6785a887ec3a0f92e6738f118b"
+        },
+        {
+          "name": "apis__batch__v1_openapi.json",
+          "operation_count": 29,
+          "schema_count": 138,
+          "sha256": "5f09687551d11cc84567d8cc5f97b65465512c81d496c8c63f712a5e34352447"
+        },
+        {
+          "name": "apis__batch_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c9d5b55a1eb99cadf8ed53f032cb45a369b71e4a56137cff9621740cf8505d0c"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1_openapi.json",
+          "operation_count": 16,
+          "schema_count": 21,
+          "sha256": "8eb26a08f4700b58d8156a9e605c575fa543a479f277583873a9c981fa74bbf0"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 19,
+          "sha256": "a71be793a74ccce26d8a4baeb63c8d1feb2e47976627bb5353cf6cac787383e8"
+        },
+        {
+          "name": "apis__certificates.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "de1b013c22ae5b7ae548e5273609b3b27018f83068a69d9c19a316b755058b4f"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "503bb5bb7acd8cd03666428710e010b680cfd8fa3368bc729b23975cf2cbbf8d"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1alpha2_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "91602f03d917f6653c9760320605adc6a39b84c5b0616d48382212398bdad423"
+        },
+        {
+          "name": "apis__coordination.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ebd405fc9982811805aba54b205295192ff10a2657be4202efa47f8baf249eb3"
+        },
+        {
+          "name": "apis__discovery.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 24,
+          "sha256": "89c718eac1f1db2d49e6029c5dedefdeca2fb5fee470a9f96f2951f08e5190f2"
+        },
+        {
+          "name": "apis__discovery.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ed1e6208224a2c6012c26df6e1644b6ed407c65311d993a33c1d97106d083bbd"
+        },
+        {
+          "name": "apis__events.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 22,
+          "sha256": "7aee17d2a6df52171498c42c078d3db180b43e88f8a3b54648996de350166228"
+        },
+        {
+          "name": "apis__events.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "f95094d9216f45aca86f9344f0315ac7aa60175f36c4a06963b264205ec8e884"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io__v1_openapi.json",
+          "operation_count": 25,
+          "schema_count": 39,
+          "sha256": "0976a7175f5579e1ed780c5e9c73f99e92fc3f1820001313bab08579e7d545f7"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "fd9a67b7504bd7bc2d061913a68b8e347dce60fe6aa8dc3162c451257163af98"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "87896f323f48b195c5a02f2ca982b53ce997cfa67ab83eb00088b5d2876a4348"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "69fa06c16151c0f14d7daef296da70a22fac53bbd84401922c38b33493a274df"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1_openapi.json",
+          "operation_count": 35,
+          "schema_count": 46,
+          "sha256": "215fb8d4007896a5e8c413cc7fd55235e4749ffaed0aeecbcbfd264a31d9e84c"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 25,
+          "sha256": "ed396be3b98c186d689edcd62961769449db70cff5ae6a29e970c9b14cd00916"
+        },
+        {
+          "name": "apis__networking.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3060f4ce09006a33349163f413f4c83aff85d6b4fc1ed0bc07e0f455d503e061"
+        },
+        {
+          "name": "apis__node.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 22,
+          "sha256": "93df193868b3d77aa76e768c4afadfd846036a4dc8b16a290026058818f22403"
+        },
+        {
+          "name": "apis__node.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "a71526de7d1abab4f61aba32dbf3a0e42ca1eee39f2a2cbe42a3a47946133843"
+        },
+        {
+          "name": "apis__policy__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 24,
+          "sha256": "67d39994828e99e249a930a28a694333b640ea81aecd7a2093927ea2143061ec"
+        },
+        {
+          "name": "apis__policy_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "52074d50fef7fc714e7cab626971597320f94ee14a31cfafd67033e32e4fb8cb"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io__v1_openapi.json",
+          "operation_count": 41,
+          "schema_count": 30,
+          "sha256": "cb328e53ccb31d9bf0c070dcf135f7404ddd51d9621e0ca22b76463022e44a6e"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "15f461c99c4904cb084be11331ca59d5e042f9cf491fd1da9b04f340f8df68e6"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1alpha3_openapi.json",
+          "operation_count": 44,
+          "schema_count": 53,
+          "sha256": "3c8c70f34a30a0fe2fa1bed50352e396c64c1e54fd444aec45fa121d73194764"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta1_openapi.json",
+          "operation_count": 44,
+          "schema_count": 54,
+          "sha256": "9813295e12e85073a1b36e5ed920286f4a9698b2ba5110dc975a0228ec4adc94"
+        },
+        {
+          "name": "apis__resource.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "19a5c7cff68dca2ce3933e0c79257cac76b99cdfd462838c5d62ea21a1d42577"
+        },
+        {
+          "name": "apis__scheduling.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "ae9a1e1df8c3b61cc6338d34a4b57ee54e95c63c93c7f2ccb3d176afd0cb52e2"
+        },
+        {
+          "name": "apis__scheduling.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dd1139dfcaed8e8f73768e7ef57b25575fbd6b8eaae6fbfbb305f5b8a1133780"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1_openapi.json",
+          "operation_count": 51,
+          "schema_count": 69,
+          "sha256": "eb37f206e8b9e097e6e16faf8c4778cbe1c77a2a4d6f21d8f5ec723564e2bb4d"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "861d1fd55fa6a93eef49c95ee9890e29eb6bee7a1af4493293ab433d334b4821"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1beta1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "a30d8b16abebb043d2fd4abfd9cf8e633b75c5a620d05158a09f91b12cc129f2"
+        },
+        {
+          "name": "apis__storage.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9cf25959dd59c003609183375f830f41ace5cfb7cfac8747fd4312149b0233bf"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "3edde0b47b45039eeba12df867c24437865c8fa04ec6c26628e404586cdd5eb8"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3f2485bf7bdd9c8922deab59d7bf8ab1db9e8d3dbac80ec9009fc4a24cc2d828"
+        },
+        {
+          "name": "apis_openapi.json",
+          "operation_count": 1,
+          "schema_count": 4,
+          "sha256": "a35becf993dbb081b28fe5afcdd9b5bf22ff70a8a83b1d773e8e541bb06810de"
+        },
+        {
+          "name": "logs_openapi.json",
+          "operation_count": 2,
+          "schema_count": 0,
+          "sha256": "6b263751854cd33af73aa5d3a753e8e406c9f32d60e8fa67af7c188141134bf7"
+        },
+        {
+          "name": "openid__v1__jwks_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "be0369fabc2dd2e26ddde8ffcc4829f0559c4f76841d96d154f76cb3ad2e95db"
+        },
+        {
+          "name": "version_openapi.json",
+          "operation_count": 1,
+          "schema_count": 1,
+          "sha256": "084885d9e823482d9ed68b4f46aa487da95dbb826584fb5d5db068c2da406182"
+        }
+      ]
+    },
+    {
+      "commit": "60a317eadfcb839692a68eab88b2096f4d708f4f",
+      "kubernetes_tag": "v1.33.0",
+      "operation_count": 1041,
+      "python_client": "33.1.0",
+      "schema_count": 707,
+      "swagger_sha256": "2af5abf98554af1599e516f31f7f1698085e6faa12b816401f569c097b9f7ef6",
+      "v3_documents": [
+        {
+          "name": ".well-known__openid-configuration_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "d776f5a3b4924075c3105f6576a4167c56a9b31d94219e4eb304af17841f1c0c"
+        },
+        {
+          "name": "api__v1_openapi.json",
+          "operation_count": 248,
+          "schema_count": 240,
+          "sha256": "752ac7998862d2b1dc2d1faf6cbcee39b386797765af6411910bdde3efb85c03"
+        },
+        {
+          "name": "api_openapi.json",
+          "operation_count": 1,
+          "schema_count": 2,
+          "sha256": "5133552f7041355f7ca8267b0ad62b067e51be8191f8f1ad54e875f6536f5010"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1_openapi.json",
+          "operation_count": 40,
+          "schema_count": 45,
+          "sha256": "650df3a8e415f25930d936bae8ff8f671ab1b7677eefa5d221fb22413d8add17"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 19,
+          "schema_count": 33,
+          "sha256": "08ff1ec5fb8c951ed9d4e00090bf60f9e108aae84c53a28b09f5d282bfeafd33"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 36,
+          "sha256": "715e1431d40be16aac5427a1c4c033e8f1d2aa42ddc9380cbf8c8857258aa09d"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dc6c54d8c99e5909ff109974998538ecfb2031827c2d11863436f7a203af1522"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 40,
+          "sha256": "2b021d3e8de34e7649cd7df3eda92d872bb042229598752d9a68e50acf2301b7"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "baf38ebd39bec67016c2da44ed239ccbf07c43869837ca56d25b8ef4d259bda8"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "3c3e6d58b2384c1196731c4b8944fd321c2939a913e0edee7b4960de2c3183c5"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9acdfcbc925ad6fa7c2563323aa0ce1f7eb309360cd53fa9f54ffd070e5447b5"
+        },
+        {
+          "name": "apis__apps__v1_openapi.json",
+          "operation_count": 77,
+          "schema_count": 157,
+          "sha256": "377bb660a128135148f44c3298867460f8fb4d1d52a41497b469fbee16bd69e4"
+        },
+        {
+          "name": "apis__apps_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c3fd555540caad353f7cc41f4e67e40b9ef7d5616588b7132d62e36d81a6846a"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1_openapi.json",
+          "operation_count": 3,
+          "schema_count": 13,
+          "sha256": "cdeaa12db780e0b50d1edc547952997b2afc6c03087fa26c9b9e0da03ab49e8e"
+        },
+        {
+          "name": "apis__authentication.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9885966ae17ed021309e2d42511e4b69080be05e358575c6763552c882398d9d"
+        },
+        {
+          "name": "apis__authorization.k8s.io__v1_openapi.json",
+          "operation_count": 5,
+          "schema_count": 24,
+          "sha256": "12dd2152d3a24d5c3b7227a4b0d20e4308f8deb121368939b8f98affff7c5e92"
+        },
+        {
+          "name": "apis__authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "7179307b29889697fd45128b99ed84e07321eed9d20491f559260cfac3886fd1"
+        },
+        {
+          "name": "apis__autoscaling__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 21,
+          "sha256": "fcd5d85311899eec6035d4b301c792db4ed2a79a1709b0b8d8b0d5e807b00450"
+        },
+        {
+          "name": "apis__autoscaling__v2_openapi.json",
+          "operation_count": 15,
+          "schema_count": 43,
+          "sha256": "53399c19ad8aba3d43a481e95e432c31f3c6c86686f1859a9bfb7f43b90adf51"
+        },
+        {
+          "name": "apis__autoscaling_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "21dd30ad7b3539eed5f766e0bdb8707af2ab6f6785a887ec3a0f92e6738f118b"
+        },
+        {
+          "name": "apis__batch__v1_openapi.json",
+          "operation_count": 29,
+          "schema_count": 138,
+          "sha256": "8c4de6b3798c51c291bc03e5fcaa36bc3851572c72286c8f014d226768af6414"
+        },
+        {
+          "name": "apis__batch_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c9d5b55a1eb99cadf8ed53f032cb45a369b71e4a56137cff9621740cf8505d0c"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1_openapi.json",
+          "operation_count": 16,
+          "schema_count": 21,
+          "sha256": "66566c2ce4ef1ad41c9246377c56f604ac6e3d4cc7913bbcdb9da16dab1db8f5"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 19,
+          "sha256": "09c69c8645f5c412cdb40e896f7764b15ee11cc3b1136f4b5fab9052d09857bf"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1beta1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 19,
+          "sha256": "49c7ff68591cab78620852bbc239db94adc3ef25f59e71a1f469752fc371bb35"
+        },
+        {
+          "name": "apis__certificates.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "de1b013c22ae5b7ae548e5273609b3b27018f83068a69d9c19a316b755058b4f"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "85328a70a3a79eb8c1e1bdbfbc823d87176f13ec803e4c31958f99d2ae6bc58f"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1alpha2_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "e08ebd4bd4ff9531e3c4389d8ca065530b3b596f4e58fd491c9b83536e98521b"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1beta1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "390469968448edb391b2708c879c3e778a329075860453cfa887ece04c3bc582"
+        },
+        {
+          "name": "apis__coordination.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ebd405fc9982811805aba54b205295192ff10a2657be4202efa47f8baf249eb3"
+        },
+        {
+          "name": "apis__discovery.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 25,
+          "sha256": "665f7e08f2afb4b211a0edc85cf1bb88ddc3c73861aa75a1cbdbe8c8e2047794"
+        },
+        {
+          "name": "apis__discovery.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ed1e6208224a2c6012c26df6e1644b6ed407c65311d993a33c1d97106d083bbd"
+        },
+        {
+          "name": "apis__events.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 22,
+          "sha256": "f8ce4e386f0949d938250a8ad245e394add6f9ccfaa5af617bdec140d5ef4bdd"
+        },
+        {
+          "name": "apis__events.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "f95094d9216f45aca86f9344f0315ac7aa60175f36c4a06963b264205ec8e884"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io__v1_openapi.json",
+          "operation_count": 25,
+          "schema_count": 39,
+          "sha256": "7e7811e7da39da6f7525ea91b1c3bbd248b813eda6e22c6e0a1b367f4a01bfb8"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "fd9a67b7504bd7bc2d061913a68b8e347dce60fe6aa8dc3162c451257163af98"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "be30923a5afc7d4960bc3d4059d0bf58c944b80a2aa0ce017c2a856627724034"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "69fa06c16151c0f14d7daef296da70a22fac53bbd84401922c38b33493a274df"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1_openapi.json",
+          "operation_count": 56,
+          "schema_count": 55,
+          "sha256": "d670fa936175dcda76daf6754423281e17a542c36ba66dd44bcfbe0f3b8c54b5"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 25,
+          "sha256": "f19c7d48b2afb1186e9637ea7242ebc6da46d749890db7f0747a4e9291386976"
+        },
+        {
+          "name": "apis__networking.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3060f4ce09006a33349163f413f4c83aff85d6b4fc1ed0bc07e0f455d503e061"
+        },
+        {
+          "name": "apis__node.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 22,
+          "sha256": "70fac757435199f5ab6f0e9a813fbefec22b2eb8b2b2b326374b642fac814091"
+        },
+        {
+          "name": "apis__node.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "a71526de7d1abab4f61aba32dbf3a0e42ca1eee39f2a2cbe42a3a47946133843"
+        },
+        {
+          "name": "apis__policy__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 24,
+          "sha256": "75063925cff31bf8f4e5c1d2088fc5d0de2d874275e40060080b98c0be272e35"
+        },
+        {
+          "name": "apis__policy_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "52074d50fef7fc714e7cab626971597320f94ee14a31cfafd67033e32e4fb8cb"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io__v1_openapi.json",
+          "operation_count": 41,
+          "schema_count": 30,
+          "sha256": "8e000cf69f1999a4c26076136dc0f081172b2cc298051551c7cda50404137a8b"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "15f461c99c4904cb084be11331ca59d5e042f9cf491fd1da9b04f340f8df68e6"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1alpha3_openapi.json",
+          "operation_count": 53,
+          "schema_count": 63,
+          "sha256": "bfe14e2555f8443d7b407cc7ed9ac30eca3b9e90537cead6e817dfb44dbf97ea"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta1_openapi.json",
+          "operation_count": 44,
+          "schema_count": 60,
+          "sha256": "d12cd9ae15baac71b6eecc61ee00259d3c19bee0b51d2eff6be97ddf0a3c2bde"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta2_openapi.json",
+          "operation_count": 44,
+          "schema_count": 60,
+          "sha256": "2f1549bde6a85a4648e947ab3b874de12ce76a493f2acde8f3f8b123546d81d1"
+        },
+        {
+          "name": "apis__resource.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "19a5c7cff68dca2ce3933e0c79257cac76b99cdfd462838c5d62ea21a1d42577"
+        },
+        {
+          "name": "apis__scheduling.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "816b2e254cba92da9f66a9af9b319735195528fce7b2fda9457a3fd36bfb8718"
+        },
+        {
+          "name": "apis__scheduling.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dd1139dfcaed8e8f73768e7ef57b25575fbd6b8eaae6fbfbb305f5b8a1133780"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1_openapi.json",
+          "operation_count": 51,
+          "schema_count": 69,
+          "sha256": "613174f3adf1ad7e606647a7208cb88193f2a15a9f58b7882942c748214a98a8"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "11980ba31e73949b37270ca52b6992b2e6f5d391a5ad8d0c8e0ee5254269cbe1"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1beta1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "71edb704c872c59c54f7d4a685d1147cc8dc3cf09bf9db3e149ba2e4f0301fad"
+        },
+        {
+          "name": "apis__storage.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9cf25959dd59c003609183375f830f41ace5cfb7cfac8747fd4312149b0233bf"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "fc19be34a78e558f2b6a664c2a0135cfeab543ddd6fa8ca9322c715075e8b985"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3f2485bf7bdd9c8922deab59d7bf8ab1db9e8d3dbac80ec9009fc4a24cc2d828"
+        },
+        {
+          "name": "apis_openapi.json",
+          "operation_count": 1,
+          "schema_count": 4,
+          "sha256": "a35becf993dbb081b28fe5afcdd9b5bf22ff70a8a83b1d773e8e541bb06810de"
+        },
+        {
+          "name": "logs_openapi.json",
+          "operation_count": 2,
+          "schema_count": 0,
+          "sha256": "6b263751854cd33af73aa5d3a753e8e406c9f32d60e8fa67af7c188141134bf7"
+        },
+        {
+          "name": "openid__v1__jwks_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "be0369fabc2dd2e26ddde8ffcc4829f0559c4f76841d96d154f76cb3ad2e95db"
+        },
+        {
+          "name": "version_openapi.json",
+          "operation_count": 1,
+          "schema_count": 1,
+          "sha256": "9077133c6af1c993f466a91f9f870daaee779581adc2c3614176c273dd2f52a2"
+        }
+      ]
+    },
+    {
+      "commit": "f28b4c9efbca5c5c0af716d9f2d5702667ee8a45",
+      "kubernetes_tag": "v1.34.0",
+      "operation_count": 1062,
+      "python_client": "34.1.0",
+      "schema_count": 730,
+      "swagger_sha256": "d3b0cdc2fda15c753206d25ab459dc7c12df64e2fd652b6809687471ea751c37",
+      "v3_documents": [
+        {
+          "name": ".well-known__openid-configuration_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "d776f5a3b4924075c3105f6576a4167c56a9b31d94219e4eb304af17841f1c0c"
+        },
+        {
+          "name": "api__v1_openapi.json",
+          "operation_count": 248,
+          "schema_count": 246,
+          "sha256": "737fe1c001340793f6536d2466e4f01d728915ae7851d2ef25a5b8cf3d48667d"
+        },
+        {
+          "name": "api_openapi.json",
+          "operation_count": 1,
+          "schema_count": 2,
+          "sha256": "5133552f7041355f7ca8267b0ad62b067e51be8191f8f1ad54e875f6536f5010"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1_openapi.json",
+          "operation_count": 40,
+          "schema_count": 45,
+          "sha256": "f8213c7b25620ed1f482c111daf7295248e7213fce4e1f07f45839725e03bab7"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 19,
+          "schema_count": 33,
+          "sha256": "5fe4e85e5c4120e805c63564d4de0584147b80f21e870d6312492b900bf116b2"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1beta1_openapi.json",
+          "operation_count": 19,
+          "schema_count": 33,
+          "sha256": "838b355b60532bcf8c444c86f08d2afd1444c72e8704d12db12c1e1df346b171"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dc6c54d8c99e5909ff109974998538ecfb2031827c2d11863436f7a203af1522"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 40,
+          "sha256": "e67d9d38b1cd5d7e74181275586105f58c5ac0d364f619dfe1dd2d63f11a2eb4"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "baf38ebd39bec67016c2da44ed239ccbf07c43869837ca56d25b8ef4d259bda8"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "614a4e611e8f6fc813759ab6ef7b4055c3967ed5533b016d47ad1a513841e632"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9acdfcbc925ad6fa7c2563323aa0ce1f7eb309360cd53fa9f54ffd070e5447b5"
+        },
+        {
+          "name": "apis__apps__v1_openapi.json",
+          "operation_count": 77,
+          "schema_count": 161,
+          "sha256": "147ad5dbbda4995e97bddca19381e6cac57c3597a06d8a0b02e4c4a6936ea325"
+        },
+        {
+          "name": "apis__apps_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c3fd555540caad353f7cc41f4e67e40b9ef7d5616588b7132d62e36d81a6846a"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1_openapi.json",
+          "operation_count": 3,
+          "schema_count": 13,
+          "sha256": "cdeaa12db780e0b50d1edc547952997b2afc6c03087fa26c9b9e0da03ab49e8e"
+        },
+        {
+          "name": "apis__authentication.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9885966ae17ed021309e2d42511e4b69080be05e358575c6763552c882398d9d"
+        },
+        {
+          "name": "apis__authorization.k8s.io__v1_openapi.json",
+          "operation_count": 5,
+          "schema_count": 24,
+          "sha256": "0c108794867b569e6b7f05523a3bfb6efcaa6ebca6d8d63532c18644ed668ffa"
+        },
+        {
+          "name": "apis__authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "7179307b29889697fd45128b99ed84e07321eed9d20491f559260cfac3886fd1"
+        },
+        {
+          "name": "apis__autoscaling__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 21,
+          "sha256": "5618cdcac759c1e919ff88f99c8054d01384a2dec9c2f7dc9d6b399fef08f1c9"
+        },
+        {
+          "name": "apis__autoscaling__v2_openapi.json",
+          "operation_count": 15,
+          "schema_count": 43,
+          "sha256": "72763d98567526639588cc27baa28d350adf970b6682c64b71f24315b665d380"
+        },
+        {
+          "name": "apis__autoscaling_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "21dd30ad7b3539eed5f766e0bdb8707af2ab6f6785a887ec3a0f92e6738f118b"
+        },
+        {
+          "name": "apis__batch__v1_openapi.json",
+          "operation_count": 29,
+          "schema_count": 142,
+          "sha256": "461d5f2b1fe6b81ae5832040cfe4d0ba717fda3f7d2218dd9d54f8bb88a7709f"
+        },
+        {
+          "name": "apis__batch_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c9d5b55a1eb99cadf8ed53f032cb45a369b71e4a56137cff9621740cf8505d0c"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1_openapi.json",
+          "operation_count": 16,
+          "schema_count": 21,
+          "sha256": "3090044d30bdc5582975a23f90303f6adea922ada75db25d1f344bc4d2ad7b94"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 24,
+          "schema_count": 24,
+          "sha256": "b9e84f0972e208cba06b173ce4559eff84ae7ac4e7b976fb0536be75092535ee"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1beta1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 19,
+          "sha256": "1e30e10b0048e965cb02a9956bc0f0a863d9a71843a13913044148fb37e99110"
+        },
+        {
+          "name": "apis__certificates.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "de1b013c22ae5b7ae548e5273609b3b27018f83068a69d9c19a316b755058b4f"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "32e5f290ef2b787989f2903ba7642b0b43b15adef246c421329b5507095f94b2"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1alpha2_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "c6c667565ba4e47ca9ec7f0f1675d2abfa86e39afde573c7cb195117fe563e9d"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1beta1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "2a09fce9afe9a434ba4547c3baefce5271520139b55074a89c615fe4b3578073"
+        },
+        {
+          "name": "apis__coordination.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ebd405fc9982811805aba54b205295192ff10a2657be4202efa47f8baf249eb3"
+        },
+        {
+          "name": "apis__discovery.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 25,
+          "sha256": "7abfdd21e4d5732e9bbfa8ea7ed921b820ca64e678700c29321e238ecf0e6bd6"
+        },
+        {
+          "name": "apis__discovery.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ed1e6208224a2c6012c26df6e1644b6ed407c65311d993a33c1d97106d083bbd"
+        },
+        {
+          "name": "apis__events.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 22,
+          "sha256": "45a79c02322f7bbc89d593c13703ebc0671e929b67d96b74d501bc6617607cc1"
+        },
+        {
+          "name": "apis__events.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "f95094d9216f45aca86f9344f0315ac7aa60175f36c4a06963b264205ec8e884"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io__v1_openapi.json",
+          "operation_count": 25,
+          "schema_count": 39,
+          "sha256": "ebe946feded8da65e7259bf4cdc5091be81df8248834184981d967f8200b912d"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "fd9a67b7504bd7bc2d061913a68b8e347dce60fe6aa8dc3162c451257163af98"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "e70de7e81ddd85527aa5590f418d981047b5455b3dc1b45d9e53933a5bb0bbf2"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "69fa06c16151c0f14d7daef296da70a22fac53bbd84401922c38b33493a274df"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1_openapi.json",
+          "operation_count": 56,
+          "schema_count": 55,
+          "sha256": "22a2799c8570e71d909c0c645fe91f995de023ecd4fa27f7dd139941b02a6bcd"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 25,
+          "sha256": "32f1f2177a4f859c5160ae842ab37900ffd6b034e7a809e1815b0dc2c4531120"
+        },
+        {
+          "name": "apis__networking.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3060f4ce09006a33349163f413f4c83aff85d6b4fc1ed0bc07e0f455d503e061"
+        },
+        {
+          "name": "apis__node.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 22,
+          "sha256": "54f40f1e3ff5fb7d7f1629de1f484a1617c4f48a7cebb05a77e47e2238270d41"
+        },
+        {
+          "name": "apis__node.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "a71526de7d1abab4f61aba32dbf3a0e42ca1eee39f2a2cbe42a3a47946133843"
+        },
+        {
+          "name": "apis__policy__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 24,
+          "sha256": "1b2480c50416d654ee25fc3443831610281ae1071366b553bd05e3782844f152"
+        },
+        {
+          "name": "apis__policy_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "52074d50fef7fc714e7cab626971597320f94ee14a31cfafd67033e32e4fb8cb"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io__v1_openapi.json",
+          "operation_count": 41,
+          "schema_count": 30,
+          "sha256": "d6d18974b0d7fc6ac7e89584d53ecc8616875e3097c02cc7dd706de6efd57fd4"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "15f461c99c4904cb084be11331ca59d5e042f9cf491fd1da9b04f340f8df68e6"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1_openapi.json",
+          "operation_count": 44,
+          "schema_count": 63,
+          "sha256": "27e6082c1615229bb1c5d487c13ac5ec252d238dd42601233de831e102baeea0"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1alpha3_openapi.json",
+          "operation_count": 10,
+          "schema_count": 23,
+          "sha256": "4ec635dc33d603c7ad950d19ee5cafeff85ee4ef7750aa9cf00f9af285d35914"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta1_openapi.json",
+          "operation_count": 44,
+          "schema_count": 63,
+          "sha256": "8d734903020eac28d2fe0db287f4ab764dfedf1e41f09905087f9d702876db43"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta2_openapi.json",
+          "operation_count": 44,
+          "schema_count": 63,
+          "sha256": "43ec5b0812c79b538ecc39b388aff621c919dee807ff8aaab103ceaaaa46e9a5"
+        },
+        {
+          "name": "apis__resource.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "19a5c7cff68dca2ce3933e0c79257cac76b99cdfd462838c5d62ea21a1d42577"
+        },
+        {
+          "name": "apis__scheduling.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "54e553f4189463a3a364bee94db656b2d742960f98c05408a2e16c3a24f1f367"
+        },
+        {
+          "name": "apis__scheduling.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dd1139dfcaed8e8f73768e7ef57b25575fbd6b8eaae6fbfbb305f5b8a1133780"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1_openapi.json",
+          "operation_count": 60,
+          "schema_count": 71,
+          "sha256": "509afce05a4ef0b7a34b839e3d57303859f2498f0508bb9edc23214c52319cb3"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "bd4d47e86a9710df3116552168c580dfda3455e402795be97cf224bd1f951b01"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1beta1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "2427eafab5432763ce3789c8f6565c9ec3dde42e1fed090139b3a00709ce86bc"
+        },
+        {
+          "name": "apis__storage.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9cf25959dd59c003609183375f830f41ace5cfb7cfac8747fd4312149b0233bf"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "48125d4f260a85b0d8af6e81cfb93945e181ba4c61d673b99a398896766f5d73"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3f2485bf7bdd9c8922deab59d7bf8ab1db9e8d3dbac80ec9009fc4a24cc2d828"
+        },
+        {
+          "name": "apis_openapi.json",
+          "operation_count": 1,
+          "schema_count": 4,
+          "sha256": "a35becf993dbb081b28fe5afcdd9b5bf22ff70a8a83b1d773e8e541bb06810de"
+        },
+        {
+          "name": "logs_openapi.json",
+          "operation_count": 2,
+          "schema_count": 0,
+          "sha256": "6b263751854cd33af73aa5d3a753e8e406c9f32d60e8fa67af7c188141134bf7"
+        },
+        {
+          "name": "openid__v1__jwks_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "be0369fabc2dd2e26ddde8ffcc4829f0559c4f76841d96d154f76cb3ad2e95db"
+        },
+        {
+          "name": "version_openapi.json",
+          "operation_count": 1,
+          "schema_count": 1,
+          "sha256": "9077133c6af1c993f466a91f9f870daaee779581adc2c3614176c273dd2f52a2"
+        }
+      ]
+    },
+    {
+      "commit": "66452049f3d692768c39c797b21b793dce80314e",
+      "kubernetes_tag": "v1.35.0",
+      "operation_count": 1067,
+      "python_client": "35.0.0",
+      "schema_count": 735,
+      "swagger_sha256": "483500149ee52ce5753d75f5639101d985bb4f5e902cc05b1ba7627465d62446",
+      "v3_documents": [
+        {
+          "name": ".well-known__openid-configuration_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "d776f5a3b4924075c3105f6576a4167c56a9b31d94219e4eb304af17841f1c0c"
+        },
+        {
+          "name": "api__v1_openapi.json",
+          "operation_count": 248,
+          "schema_count": 247,
+          "sha256": "45666551cf0928e4e8a9b88508f9b23aa78d2341aa27b0587457b2694717fcc1"
+        },
+        {
+          "name": "api_openapi.json",
+          "operation_count": 1,
+          "schema_count": 2,
+          "sha256": "5133552f7041355f7ca8267b0ad62b067e51be8191f8f1ad54e875f6536f5010"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1_openapi.json",
+          "operation_count": 40,
+          "schema_count": 45,
+          "sha256": "bb1fb9432100db52e6e4d6d64f649cc62a6bb91014084c6d21b128652f41ecd6"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 19,
+          "schema_count": 33,
+          "sha256": "6862547cff2125f72ee436518ee499595951cd0b4c4b369f045a6ced0a0a0be8"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1beta1_openapi.json",
+          "operation_count": 19,
+          "schema_count": 33,
+          "sha256": "af15890ecab6ef94c7804fecd8ee3ebacfdbb78cbabb4494b61104dbf3f77ca0"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dc6c54d8c99e5909ff109974998538ecfb2031827c2d11863436f7a203af1522"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 40,
+          "sha256": "f6eb40887f8ce499c83f6032da1b35f980ecf8e6a312c06078f1356e3aa3d3e4"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "baf38ebd39bec67016c2da44ed239ccbf07c43869837ca56d25b8ef4d259bda8"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "ac954399fa80c6e87f95858b50f5602f899e1307d37be47f38f1959783315daa"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9acdfcbc925ad6fa7c2563323aa0ce1f7eb309360cd53fa9f54ffd070e5447b5"
+        },
+        {
+          "name": "apis__apps__v1_openapi.json",
+          "operation_count": 77,
+          "schema_count": 162,
+          "sha256": "8f22326dfd8be012bc6247e44bb6adb8070079c0ca9c0a527840811bccf3482e"
+        },
+        {
+          "name": "apis__apps_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c3fd555540caad353f7cc41f4e67e40b9ef7d5616588b7132d62e36d81a6846a"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1_openapi.json",
+          "operation_count": 3,
+          "schema_count": 13,
+          "sha256": "cdeaa12db780e0b50d1edc547952997b2afc6c03087fa26c9b9e0da03ab49e8e"
+        },
+        {
+          "name": "apis__authentication.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9885966ae17ed021309e2d42511e4b69080be05e358575c6763552c882398d9d"
+        },
+        {
+          "name": "apis__authorization.k8s.io__v1_openapi.json",
+          "operation_count": 5,
+          "schema_count": 24,
+          "sha256": "0c108794867b569e6b7f05523a3bfb6efcaa6ebca6d8d63532c18644ed668ffa"
+        },
+        {
+          "name": "apis__authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "7179307b29889697fd45128b99ed84e07321eed9d20491f559260cfac3886fd1"
+        },
+        {
+          "name": "apis__autoscaling__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 21,
+          "sha256": "baeafa1354c0f31e75e73706ebc7bafacc9e6ab3f11769dd3534199ce3e93192"
+        },
+        {
+          "name": "apis__autoscaling__v2_openapi.json",
+          "operation_count": 15,
+          "schema_count": 43,
+          "sha256": "7ac4c0478934ff422bc9060266a390f718f03198dde8cd2ba340a429a3a950cd"
+        },
+        {
+          "name": "apis__autoscaling_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "21dd30ad7b3539eed5f766e0bdb8707af2ab6f6785a887ec3a0f92e6738f118b"
+        },
+        {
+          "name": "apis__batch__v1_openapi.json",
+          "operation_count": 29,
+          "schema_count": 143,
+          "sha256": "75375a3f73cf46fc9351dcf21fd57192acbebb2bae96170b0831af75e860efc4"
+        },
+        {
+          "name": "apis__batch_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c9d5b55a1eb99cadf8ed53f032cb45a369b71e4a56137cff9621740cf8505d0c"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1_openapi.json",
+          "operation_count": 16,
+          "schema_count": 21,
+          "sha256": "c34ff08d8e1aeabdc7009943b7236491dc17d0e1c87d2754d821efdc8a8662ab"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 19,
+          "sha256": "eddcae5601781fd0cacf559e7abf97503417bf459c4a9abd503e80622ecd27d1"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1beta1_openapi.json",
+          "operation_count": 24,
+          "schema_count": 24,
+          "sha256": "4c7bda26716613abd5da1591a4cc688671d6c8fb502997b9621b83262425b535"
+        },
+        {
+          "name": "apis__certificates.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "de1b013c22ae5b7ae548e5273609b3b27018f83068a69d9c19a316b755058b4f"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "89ceffa4453bdd1d31edfa162d63b74a8eeca6dfea5e1d787e0de2391f9cabef"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1alpha2_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "0f0051281bc15fb36c2bb2490982f075d214d68eaa386c821f0d3a3bbde1ee79"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1beta1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 20,
+          "sha256": "f5fe7239cc79ae6a1498c9938e3b97b229680ef17569c78a69f651a3bc15b939"
+        },
+        {
+          "name": "apis__coordination.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ebd405fc9982811805aba54b205295192ff10a2657be4202efa47f8baf249eb3"
+        },
+        {
+          "name": "apis__discovery.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 25,
+          "sha256": "588d45f7bae86c0f2a54775d9e8af3f4b08a1d8d4e235df30bae06adc7ce90f1"
+        },
+        {
+          "name": "apis__discovery.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ed1e6208224a2c6012c26df6e1644b6ed407c65311d993a33c1d97106d083bbd"
+        },
+        {
+          "name": "apis__events.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 22,
+          "sha256": "fa533d66d3249840f74ef96ce0607073663eef5025395707a2edc3820bb5c4b6"
+        },
+        {
+          "name": "apis__events.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "f95094d9216f45aca86f9344f0315ac7aa60175f36c4a06963b264205ec8e884"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io__v1_openapi.json",
+          "operation_count": 25,
+          "schema_count": 39,
+          "sha256": "6427dc1309377af356484863f568a261fa24f62e54d32e4bc53c1720f51da484"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "fd9a67b7504bd7bc2d061913a68b8e347dce60fe6aa8dc3162c451257163af98"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "8bde7e0212ff9baaf2fd303c8535ed7cbb3cd5d54b4ed2493baf7e8adc9e5605"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "69fa06c16151c0f14d7daef296da70a22fac53bbd84401922c38b33493a274df"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1_openapi.json",
+          "operation_count": 56,
+          "schema_count": 55,
+          "sha256": "6b974984cb19f1ef1832fdfa84b67ce600eff1db354cdb49db0edb1cf87e234f"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 25,
+          "sha256": "87330a1199787d3c0cded49a192feb2b449b1190b0e6adf51de5a1bace1487b3"
+        },
+        {
+          "name": "apis__networking.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3060f4ce09006a33349163f413f4c83aff85d6b4fc1ed0bc07e0f455d503e061"
+        },
+        {
+          "name": "apis__node.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 22,
+          "sha256": "2193906b2991a786ebb7c2edabd50d0e0a590ecce0e8c3b7c17856ae7f290533"
+        },
+        {
+          "name": "apis__node.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "a71526de7d1abab4f61aba32dbf3a0e42ca1eee39f2a2cbe42a3a47946133843"
+        },
+        {
+          "name": "apis__policy__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 24,
+          "sha256": "166c6c720025c3b5a03e4cd4698a9dd876de383df07a9c0955cff8da833d51d5"
+        },
+        {
+          "name": "apis__policy_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "52074d50fef7fc714e7cab626971597320f94ee14a31cfafd67033e32e4fb8cb"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io__v1_openapi.json",
+          "operation_count": 41,
+          "schema_count": 30,
+          "sha256": "b65de9550d92bca038a9f72d3dadea088d268c39aec999c1a215314331af9f6d"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "15f461c99c4904cb084be11331ca59d5e042f9cf491fd1da9b04f340f8df68e6"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1_openapi.json",
+          "operation_count": 44,
+          "schema_count": 63,
+          "sha256": "5dafcfc0c534fd5d987392fb8fb5d491637273251755aa02b6d28a54f7d2ce34"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1alpha3_openapi.json",
+          "operation_count": 13,
+          "schema_count": 23,
+          "sha256": "b7f15e0929d702b7aaee7f3bf3cdc46a8bcbd429898b4e074609c08de08f2411"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta1_openapi.json",
+          "operation_count": 44,
+          "schema_count": 63,
+          "sha256": "37a6940be730819ae92265f4029f65c05f6ed2eb533a9170235939b86f439708"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta2_openapi.json",
+          "operation_count": 44,
+          "schema_count": 63,
+          "sha256": "3bd28fea3cb69cac79e029f7f51f8db433b563a6b8cabddcbfd0957f5f5bd862"
+        },
+        {
+          "name": "apis__resource.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "19a5c7cff68dca2ce3933e0c79257cac76b99cdfd462838c5d62ea21a1d42577"
+        },
+        {
+          "name": "apis__scheduling.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "7bce1e2f85c8eb40ba1a821f63726ac9207361182bfaec7239591680e5487d82"
+        },
+        {
+          "name": "apis__scheduling.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 24,
+          "sha256": "0830ac12388b4be606b43b913a2e79bd06955b4eb1b0c93b262515d7ebe05c9a"
+        },
+        {
+          "name": "apis__scheduling.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dd1139dfcaed8e8f73768e7ef57b25575fbd6b8eaae6fbfbb305f5b8a1133780"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1_openapi.json",
+          "operation_count": 60,
+          "schema_count": 71,
+          "sha256": "f5e5ae4c399889482b5228d7264b0d3bbdd0a12cb2358f26eaceffee610d9499"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1beta1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 18,
+          "sha256": "252360a1affa9b950d2eea33de34c2f9f8fb21e8cc53f66239e4d335d2080683"
+        },
+        {
+          "name": "apis__storage.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9cf25959dd59c003609183375f830f41ace5cfb7cfac8747fd4312149b0233bf"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io__v1beta1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 22,
+          "sha256": "3df99a68e6a84f06c286671fcbd2c2c597152a65c37eee497379a5a2583161e1"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3f2485bf7bdd9c8922deab59d7bf8ab1db9e8d3dbac80ec9009fc4a24cc2d828"
+        },
+        {
+          "name": "apis_openapi.json",
+          "operation_count": 1,
+          "schema_count": 4,
+          "sha256": "a35becf993dbb081b28fe5afcdd9b5bf22ff70a8a83b1d773e8e541bb06810de"
+        },
+        {
+          "name": "logs_openapi.json",
+          "operation_count": 2,
+          "schema_count": 0,
+          "sha256": "6b263751854cd33af73aa5d3a753e8e406c9f32d60e8fa67af7c188141134bf7"
+        },
+        {
+          "name": "openid__v1__jwks_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "be0369fabc2dd2e26ddde8ffcc4829f0559c4f76841d96d154f76cb3ad2e95db"
+        },
+        {
+          "name": "version_openapi.json",
+          "operation_count": 1,
+          "schema_count": 1,
+          "sha256": "9077133c6af1c993f466a91f9f870daaee779581adc2c3614176c273dd2f52a2"
+        }
+      ]
+    },
+    {
+      "commit": "ecf6decece6a6de25a57aad9ba90b6ce580f6f78",
+      "kubernetes_tag": "v1.36.0",
+      "operation_count": 1123,
+      "python_client": "36.0.3",
+      "schema_count": 771,
+      "swagger_sha256": "dcede2063da1d7ad62ecb5af8adb6d7fabd0b52385a7fa0048afb491dac90450",
+      "v3_documents": [
+        {
+          "name": ".well-known__openid-configuration_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "d776f5a3b4924075c3105f6576a4167c56a9b31d94219e4eb304af17841f1c0c"
+        },
+        {
+          "name": "api__v1_openapi.json",
+          "operation_count": 248,
+          "schema_count": 251,
+          "sha256": "a3cbb14c08e7832e80776e717a5658a178dccb3562cc5c1238193634b6985ff8"
+        },
+        {
+          "name": "api_openapi.json",
+          "operation_count": 1,
+          "schema_count": 2,
+          "sha256": "5133552f7041355f7ca8267b0ad62b067e51be8191f8f1ad54e875f6536f5010"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1_openapi.json",
+          "operation_count": 58,
+          "schema_count": 55,
+          "sha256": "497d32b28c101b251c4192577794c8b17a5fecdc7551ba5eba0d6ab1bbbace21"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 19,
+          "schema_count": 34,
+          "sha256": "332952ab1d5b4ad7ff88e58182f7891d967bfde2ce31ce5403a8ae4f8268dff2"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io__v1beta1_openapi.json",
+          "operation_count": 19,
+          "schema_count": 34,
+          "sha256": "5cbea9331dd716f65aa073e5a3722b0139477266a9be10d2ca0530ad3ad71abd"
+        },
+        {
+          "name": "apis__admissionregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dc6c54d8c99e5909ff109974998538ecfb2031827c2d11863436f7a203af1522"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 41,
+          "sha256": "1c7dd621bece6661867bcc29471f774a46b36c02567d59815c7c72f6d08aa512"
+        },
+        {
+          "name": "apis__apiextensions.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "baf38ebd39bec67016c2da44ed239ccbf07c43869837ca56d25b8ef4d259bda8"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io__v1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 23,
+          "sha256": "d3a0471e3e8ed54872390d5e587a773c6ec750369ab470e35cc2c4a7e75a7e10"
+        },
+        {
+          "name": "apis__apiregistration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9acdfcbc925ad6fa7c2563323aa0ce1f7eb309360cd53fa9f54ffd070e5447b5"
+        },
+        {
+          "name": "apis__apps__v1_openapi.json",
+          "operation_count": 77,
+          "schema_count": 163,
+          "sha256": "4e190f85e4d9bcea04ee9a4a1501205fd4d1902766426c0e3de7efdeaa7395dc"
+        },
+        {
+          "name": "apis__apps_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c3fd555540caad353f7cc41f4e67e40b9ef7d5616588b7132d62e36d81a6846a"
+        },
+        {
+          "name": "apis__authentication.k8s.io__v1_openapi.json",
+          "operation_count": 3,
+          "schema_count": 13,
+          "sha256": "a024bbc5e65cefbf48d1db9e556b05222f56bde5e70b1782c285da76f6521b44"
+        },
+        {
+          "name": "apis__authentication.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9885966ae17ed021309e2d42511e4b69080be05e358575c6763552c882398d9d"
+        },
+        {
+          "name": "apis__authorization.k8s.io__v1_openapi.json",
+          "operation_count": 5,
+          "schema_count": 24,
+          "sha256": "6654256e4da02e94d848dfecf10245b6e74769c205822ae6ce709e742a6018d9"
+        },
+        {
+          "name": "apis__authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "7179307b29889697fd45128b99ed84e07321eed9d20491f559260cfac3886fd1"
+        },
+        {
+          "name": "apis__autoscaling__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 22,
+          "sha256": "42775783d2fa0e55637f1c910361abb5970150c944bcc2bce330cb647d26f1e1"
+        },
+        {
+          "name": "apis__autoscaling__v2_openapi.json",
+          "operation_count": 15,
+          "schema_count": 44,
+          "sha256": "47726b03de581449a6b1ab4323604df6edec4894e199f3059ff1870424d864ad"
+        },
+        {
+          "name": "apis__autoscaling_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "21dd30ad7b3539eed5f766e0bdb8707af2ab6f6785a887ec3a0f92e6738f118b"
+        },
+        {
+          "name": "apis__batch__v1_openapi.json",
+          "operation_count": 29,
+          "schema_count": 144,
+          "sha256": "f39ccc48cf5d51dd6312299624c5033f935a67b8044f4c91f0fb8cdc7391f689"
+        },
+        {
+          "name": "apis__batch_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "c9d5b55a1eb99cadf8ed53f032cb45a369b71e4a56137cff9621740cf8505d0c"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1_openapi.json",
+          "operation_count": 16,
+          "schema_count": 22,
+          "sha256": "d8a3339d727913d644016ba2f24aaee9ad4416011066d3baed2c1afc3bf1f6c8"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 20,
+          "sha256": "46b03068a91dd326ccbeeddf26ed6299c106c83e2c63bebf5eb376e373fa3d69"
+        },
+        {
+          "name": "apis__certificates.k8s.io__v1beta1_openapi.json",
+          "operation_count": 24,
+          "schema_count": 25,
+          "sha256": "049de3b36f5e80b503610a70baea298747bb805d036e96f68388463ce91857b3"
+        },
+        {
+          "name": "apis__certificates.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "de1b013c22ae5b7ae548e5273609b3b27018f83068a69d9c19a316b755058b4f"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 21,
+          "sha256": "54b9a4143dbe22fa74ed47ae2a3694f844d1c65e7c1012c80667e0c7d0e5112a"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1alpha2_openapi.json",
+          "operation_count": 12,
+          "schema_count": 21,
+          "sha256": "69f49100f471578cef82b0b294ff49fef5c37c11718d94ae8b8c9ad4e3040bb0"
+        },
+        {
+          "name": "apis__coordination.k8s.io__v1beta1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 21,
+          "sha256": "73bf8fc2779b4c9ebb16c42b13db0e910f73ade7f23b56763c5a50262b6ddca3"
+        },
+        {
+          "name": "apis__coordination.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ebd405fc9982811805aba54b205295192ff10a2657be4202efa47f8baf249eb3"
+        },
+        {
+          "name": "apis__discovery.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 26,
+          "sha256": "29b42c9d7c944a0902e2738e3a0d4567ddda326292a8dedc75fe74eea7089af1"
+        },
+        {
+          "name": "apis__discovery.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "ed1e6208224a2c6012c26df6e1644b6ed407c65311d993a33c1d97106d083bbd"
+        },
+        {
+          "name": "apis__events.k8s.io__v1_openapi.json",
+          "operation_count": 12,
+          "schema_count": 23,
+          "sha256": "59e3fdad17e39047e9fab4f75fdcc7aaf7269bf1dc148a7f3865ab90e3334e80"
+        },
+        {
+          "name": "apis__events.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "f95094d9216f45aca86f9344f0315ac7aa60175f36c4a06963b264205ec8e884"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io__v1_openapi.json",
+          "operation_count": 25,
+          "schema_count": 40,
+          "sha256": "9f8b7cd5953c2316b42d12c55339ec4f1b16046a644634256cc02d7312a8d895"
+        },
+        {
+          "name": "apis__flowcontrol.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "fd9a67b7504bd7bc2d061913a68b8e347dce60fe6aa8dc3162c451257163af98"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io__v1alpha1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 23,
+          "sha256": "b3c5fe27eae1819e5b24095d7e8dc56b478c49b9f2040ea98fe11f9679e8e726"
+        },
+        {
+          "name": "apis__internal.apiserver.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "69fa06c16151c0f14d7daef296da70a22fac53bbd84401922c38b33493a274df"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1_openapi.json",
+          "operation_count": 56,
+          "schema_count": 56,
+          "sha256": "ea25fb66aae62d27a39649461cba91eea96a03c6395b378cc20a019f4dd77306"
+        },
+        {
+          "name": "apis__networking.k8s.io__v1beta1_openapi.json",
+          "operation_count": 22,
+          "schema_count": 26,
+          "sha256": "c64a384190f4fd15d750b8a0658cbb85f09db8e736f91fab998638a86d61814f"
+        },
+        {
+          "name": "apis__networking.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3060f4ce09006a33349163f413f4c83aff85d6b4fc1ed0bc07e0f455d503e061"
+        },
+        {
+          "name": "apis__node.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 23,
+          "sha256": "e08ef6b735b0adeddd6a1451bd46b00971bc84b156136d9d46f80ca207c54cb6"
+        },
+        {
+          "name": "apis__node.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "a71526de7d1abab4f61aba32dbf3a0e42ca1eee39f2a2cbe42a3a47946133843"
+        },
+        {
+          "name": "apis__policy__v1_openapi.json",
+          "operation_count": 15,
+          "schema_count": 25,
+          "sha256": "89af0b1d3257e63e6bb55d9e0e9387a5461c27abacadd943e37d973b1c3fa67c"
+        },
+        {
+          "name": "apis__policy_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "52074d50fef7fc714e7cab626971597320f94ee14a31cfafd67033e32e4fb8cb"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io__v1_openapi.json",
+          "operation_count": 41,
+          "schema_count": 31,
+          "sha256": "060632eb16c82d9d204d23dc70bae49237d206d7bc2d22b812d160ee61a1fb54"
+        },
+        {
+          "name": "apis__rbac.authorization.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "15f461c99c4904cb084be11331ca59d5e042f9cf491fd1da9b04f340f8df68e6"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1_openapi.json",
+          "operation_count": 44,
+          "schema_count": 65,
+          "sha256": "db24d1cb24681696af6478da11d530d0b6c288b172526d1425453761fb131e00"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1alpha3_openapi.json",
+          "operation_count": 25,
+          "schema_count": 29,
+          "sha256": "e227ce42630c422e1263e05a452a07e68a00a3ecabb47dd3f49140e6e08887b3"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta1_openapi.json",
+          "operation_count": 44,
+          "schema_count": 65,
+          "sha256": "51035c8dcea33c09e125fcf2749daf51cd39b1f515de03638908ae6ce586cdb0"
+        },
+        {
+          "name": "apis__resource.k8s.io__v1beta2_openapi.json",
+          "operation_count": 56,
+          "schema_count": 70,
+          "sha256": "a68c052604b9e17fd2506bd7accf2516b735e8b7a0685aed441511105d2ab0ca"
+        },
+        {
+          "name": "apis__resource.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "19a5c7cff68dca2ce3933e0c79257cac76b99cdfd462838c5d62ea21a1d42577"
+        },
+        {
+          "name": "apis__scheduling.k8s.io__v1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 19,
+          "sha256": "c832d22dcc8c28e859a9bc2a01635fe22ccbf7e433ae401a1691b7afde3e0d66"
+        },
+        {
+          "name": "apis__scheduling.k8s.io__v1alpha2_openapi.json",
+          "operation_count": 26,
+          "schema_count": 36,
+          "sha256": "34ef4f4363dd505fc2cca53e55562c926f31d92abc92e055aa1e2410aa479880"
+        },
+        {
+          "name": "apis__scheduling.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "dd1139dfcaed8e8f73768e7ef57b25575fbd6b8eaae6fbfbb305f5b8a1133780"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1_openapi.json",
+          "operation_count": 60,
+          "schema_count": 72,
+          "sha256": "b6599cea1616d682816f05a4c2713c5d5284707cb1121af874f0a2eac737d77d"
+        },
+        {
+          "name": "apis__storage.k8s.io__v1beta1_openapi.json",
+          "operation_count": 10,
+          "schema_count": 19,
+          "sha256": "14eb2c1fb06ff752374c2d93ece91be7d09aee28d98fbd46a3905d246f0b9931"
+        },
+        {
+          "name": "apis__storage.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "9cf25959dd59c003609183375f830f41ace5cfb7cfac8747fd4312149b0233bf"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io__v1beta1_openapi.json",
+          "operation_count": 13,
+          "schema_count": 23,
+          "sha256": "9235547d6fe39acf620db96acf742c7dd2075e6268f357926f5b0a07097e7d34"
+        },
+        {
+          "name": "apis__storagemigration.k8s.io_openapi.json",
+          "operation_count": 1,
+          "schema_count": 3,
+          "sha256": "3f2485bf7bdd9c8922deab59d7bf8ab1db9e8d3dbac80ec9009fc4a24cc2d828"
+        },
+        {
+          "name": "apis_openapi.json",
+          "operation_count": 1,
+          "schema_count": 4,
+          "sha256": "a35becf993dbb081b28fe5afcdd9b5bf22ff70a8a83b1d773e8e541bb06810de"
+        },
+        {
+          "name": "logs_openapi.json",
+          "operation_count": 2,
+          "schema_count": 0,
+          "sha256": "6b263751854cd33af73aa5d3a753e8e406c9f32d60e8fa67af7c188141134bf7"
+        },
+        {
+          "name": "openid__v1__jwks_openapi.json",
+          "operation_count": 1,
+          "schema_count": 0,
+          "sha256": "be0369fabc2dd2e26ddde8ffcc4829f0559c4f76841d96d154f76cb3ad2e95db"
+        },
+        {
+          "name": "version_openapi.json",
+          "operation_count": 1,
+          "schema_count": 1,
+          "sha256": "9077133c6af1c993f466a91f9f870daaee779581adc2c3614176c273dd2f52a2"
+        }
+      ]
+    }
+  ]
+}

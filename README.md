@@ -71,6 +71,7 @@ client.autoscaling_v2
 - [Core v1 resources](docs/core-v1.md)
 - [Custom resources](docs/custom-resources.md)
 - [Errors, retries, and watches](docs/reliability.md)
+- [Kubernetes API coverage](docs/api-coverage.md)
 
 ## Development
 

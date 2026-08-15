@@ -76,3 +76,4 @@ async with AsyncKubeClient.from_kubeconfig() as client:
 - [Work with Core v1 resources](core-v1.md)
 - [Use custom resources](custom-resources.md)
 - [Handle errors, retries, and watches](reliability.md)
+- [See Kubernetes API coverage](api-coverage.md)

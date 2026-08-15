@@ -1,0 +1,34 @@
+{
+  "versions": [
+    {
+      "commit": "9edcffcde5595e8a5b1a35f88c421764e575afce",
+      "kubernetes_tag": "v1.31.0",
+      "python_client": "31.0.0"
+    },
+    {
+      "commit": "70d3cc986aa8221cd1dfb1121852688902d3bf53",
+      "kubernetes_tag": "v1.32.0",
+      "python_client": "32.0.1"
+    },
+    {
+      "commit": "60a317eadfcb839692a68eab88b2096f4d708f4f",
+      "kubernetes_tag": "v1.33.0",
+      "python_client": "33.1.0"
+    },
+    {
+      "commit": "f28b4c9efbca5c5c0af716d9f2d5702667ee8a45",
+      "kubernetes_tag": "v1.34.0",
+      "python_client": "34.1.0"
+    },
+    {
+      "commit": "66452049f3d692768c39c797b21b793dce80314e",
+      "kubernetes_tag": "v1.35.0",
+      "python_client": "35.0.0"
+    },
+    {
+      "commit": "ecf6decece6a6de25a57aad9ba90b6ce580f6f78",
+      "kubernetes_tag": "v1.36.0",
+      "python_client": "36.0.3"
+    }
+  ]
+}

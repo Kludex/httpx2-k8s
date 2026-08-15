@@ -321,6 +321,25 @@ def test_exec_client_certificate_rejects_invalid_pem(
         load_kubeconfig_yaml(_kubeconfig(user_config=_exec_config()))
 
 
+def test_exec_accepts_explicitly_null_optional_lists(monkeypatch: pytest.MonkeyPatch) -> None:
+    def run_plugin(args: list[str], **kwargs: object) -> subprocess.CompletedProcess[bytes]:
+        environment = cast(Mapping[str, str], kwargs["env"])
+        assert args == ["credential-plugin"]
+        assert "PLUGIN_ENV" not in environment
+        return subprocess.CompletedProcess(args, 0, stdout=_exec_output(), stderr=b"")
+
+    exec_config = _exec_config().replace(
+        "      args: [--credential, json]\n"
+        "      env:\n"
+        "      - name: PLUGIN_ENV\n"
+        "        value: configured\n",
+        "      args: null\n      env: null\n",
+    )
+    monkeypatch.setattr(subprocess, "run", run_plugin)
+
+    assert load_kubeconfig_yaml(_kubeconfig(user_config=exec_config)).token == "exec-token"
+
+
 @pytest.mark.parametrize(
     ("api_version", "mode", "terminal", "expected_interactive"),
     [

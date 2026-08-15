@@ -51,6 +51,39 @@ def test_cluster_and_namespaced_custom_objects_through_httpx2() -> None:
             )
             == cluster
         )
+        assert (
+            client.custom_objects.read_cluster_custom_object_subresource(
+                group,
+                "v1",
+                "clusterwidgets",
+                "global widget",
+                "scale",
+                response_model=Unstructured,
+            )
+            == cluster
+        )
+        cluster = client.custom_objects.replace_cluster_custom_object_subresource(
+            group,
+            "v1",
+            "clusterwidgets",
+            "global widget",
+            "scale",
+            cluster,
+        )
+        cluster = client.custom_objects.patch_cluster_custom_object_subresource(
+            group,
+            "v1",
+            "clusterwidgets",
+            "global widget",
+            "scale",
+            JsonPatch(
+                operations=[
+                    JsonPatchOperation(op="test", path="/spec/replicas", value=2),
+                    JsonPatchOperation(op="replace", path="/spec/replicas", value=3),
+                ]
+            ),
+            response_model=Unstructured,
+        )
         assert cluster.model_extra is not None
         cluster_spec = cast(dict[str, object], cluster.model_extra["spec"])
         cluster_spec["replicas"] = 3
@@ -196,6 +229,40 @@ def test_cluster_and_namespaced_custom_objects_through_httpx2() -> None:
             )
             == widget
         )
+        assert (
+            client.custom_objects.read_namespaced_custom_object_subresource(
+                group,
+                "v1",
+                "team one",
+                "widgets",
+                "typed widget",
+                "status",
+                response_model=Widget,
+            )
+            == widget
+        )
+        widget = client.custom_objects.replace_namespaced_custom_object_subresource(
+            group,
+            "v1",
+            "team one",
+            "widgets",
+            "typed widget",
+            "status",
+            widget,
+        )
+        widget = client.custom_objects.patch_namespaced_custom_object_subresource(
+            group,
+            "v1",
+            "team one",
+            "widgets",
+            "typed widget",
+            "status",
+            MergePatch(document={"spec": {"size": 3}}),
+            response_model=Widget,
+            field_manager="merge-manager",
+            dry_run="All",
+        )
+        assert widget.spec.size == 3
         widget.spec.size = 4
         widget = client.custom_objects.replace_namespaced_custom_object(
             group, "v1", "team one", "widgets", "typed widget", widget
