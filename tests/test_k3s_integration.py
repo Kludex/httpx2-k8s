@@ -4409,12 +4409,22 @@ async def _async_namespace_lifecycle(kubeconfig: str) -> None:
         async def read_async_command_pod() -> Pod:
             return await client.core_v1.read_namespaced_pod("async-command", "httpx2-k8s-async")
 
-        async_command_pod = await _eventually_async(
-            read_async_command_pod,
-            description="Async command Pod did not start",
-            accept=lambda current: current.status is not None and current.status.phase == "Running",
-            timeout=60.0,
-        )
+        try:
+            async_command_pod = await _eventually_async(
+                read_async_command_pod,
+                description="Async command Pod did not start",
+                accept=lambda current: (
+                    current.status is not None and current.status.phase == "Running"
+                ),
+                timeout=60.0,
+            )
+        except AssertionError as exc:
+            events = await client.core_v1.list_namespaced_event(
+                "httpx2-k8s-async",
+                field_selector="involvedObject.name=async-command",
+            )
+            details = [(event.reason, event.message) for event in events.items]
+            raise AssertionError(f"{exc}; events: {details!r}") from exc
         async_command_pod = await _eventually_async(
             lambda: _read_and_replace_async(
                 lambda: client.core_v1.read_namespaced_pod("async-command", "httpx2-k8s-async"),
