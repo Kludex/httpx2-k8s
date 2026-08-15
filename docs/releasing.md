@@ -16,5 +16,5 @@ The release workflow rejects a tag whose value does not exactly match the versio
 `pyproject.toml`. It rebuilds from the tagged source, uploads the artifacts to the workflow run,
 then publishes them from the protected `pypi` environment.
 
-PyPI must have a trusted publisher configured for this repository, the `release.yml` workflow,
+PyPI must have a trusted publisher configured for this repository, the `publish.yml` workflow,
 and the `pypi` environment before the first release.
