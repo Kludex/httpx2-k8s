@@ -9,16 +9,18 @@ import httpx2
 from httpx2_k8s._api import resource_name
 from httpx2_k8s._official_api import PatchContentType, iter_watch_response, query_parameters
 from httpx2_k8s._protocols import SyncKubeClientProtocol
-from httpx2_k8s.models import (
-    FlowControlV1FlowSchema,
-    FlowControlV1FlowSchemaList,
-    FlowControlV1PriorityLevelConfiguration,
-    FlowControlV1PriorityLevelConfigurationList,
+from httpx2_k8s.apimachinery import (
     MetaV1APIResourceList,
     MetaV1DeleteOptions,
     MetaV1Patch,
     MetaV1Status,
     MetaV1WatchEvent,
+)
+from httpx2_k8s.flowcontrol.v1._models import (
+    FlowControlV1FlowSchema,
+    FlowControlV1FlowSchemaList,
+    FlowControlV1PriorityLevelConfiguration,
+    FlowControlV1PriorityLevelConfigurationList,
 )
 
 

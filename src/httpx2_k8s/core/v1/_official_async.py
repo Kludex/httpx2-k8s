@@ -9,9 +9,20 @@ import httpx2
 from httpx2_k8s._api import resource_name
 from httpx2_k8s._official_api import PatchContentType, iter_async_watch_response, query_parameters
 from httpx2_k8s._protocols import AsyncKubeClientProtocol
-from httpx2_k8s.models import (
+from httpx2_k8s.apimachinery import (
+    MetaV1APIResourceList,
+    MetaV1DeleteOptions,
+    MetaV1Patch,
+    MetaV1Status,
+    MetaV1WatchEvent,
+)
+from httpx2_k8s.authentication.v1._models import (
     AuthenticationV1TokenRequest,
+)
+from httpx2_k8s.autoscaling.v1._models import (
     AutoscalingV1Scale,
+)
+from httpx2_k8s.core.v1._models import (
     CoreV1Binding,
     CoreV1ComponentStatus,
     CoreV1ComponentStatusList,
@@ -45,11 +56,8 @@ from httpx2_k8s.models import (
     CoreV1ServiceAccount,
     CoreV1ServiceAccountList,
     CoreV1ServiceList,
-    MetaV1APIResourceList,
-    MetaV1DeleteOptions,
-    MetaV1Patch,
-    MetaV1Status,
-    MetaV1WatchEvent,
+)
+from httpx2_k8s.policy.v1._models import (
     PolicyV1Eviction,
 )
 

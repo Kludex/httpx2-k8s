@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import gzip
+import importlib
 import json
 import types
 from datetime import datetime
@@ -12,9 +13,9 @@ import pytest
 from pydantic import BaseModel, JsonValue
 
 import httpx2_k8s._official_models as official_models
-import httpx2_k8s.models as public_models
 from httpx2_k8s._models import KubeModel
 from httpx2_k8s._official_models import (
+    OFFICIAL_MODEL_MODULES,
     OFFICIAL_MODEL_NAMES,
     OFFICIAL_MODELS,
     OFFICIAL_SCHEMA_EXTENSIONS,
@@ -295,19 +296,18 @@ def test_official_object_registry_has_every_object_schema() -> None:
 
 
 def test_every_official_model_is_public() -> None:
-    expected = set(OFFICIAL_MODEL_NAMES.values())
-    assert set(public_models.__all__) == expected
-    assert expected <= set(dir(public_models))
-    assert all(getattr(public_models, name) is getattr(official_models, name) for name in expected)
-
-
-def test_unknown_official_model_is_not_public() -> None:
-    name = "MissingModel"
-    with pytest.raises(
-        AttributeError,
-        match=r"module 'httpx2_k8s\.models' has no attribute 'MissingModel'",
-    ):
-        getattr(public_models, name)
+    assert all(
+        (
+            model_name in cast(list[str], module.__all__)
+            and getattr(module, model_name) is getattr(official_models, model_name)
+        )
+        for canonical_name, model_name in OFFICIAL_MODEL_NAMES.items()
+        if (
+            module := importlib.import_module(
+                OFFICIAL_MODEL_MODULES[canonical_name].removesuffix("._models")
+            )
+        )
+    )
 
 
 @pytest.mark.parametrize(("canonical_name", "schema"), OBJECT_CASES)
@@ -380,7 +380,10 @@ def test_official_type_alias_matches_schema(
     canonical_name: str,
     schema: dict[str, object],
 ) -> None:
-    alias = getattr(public_models, OFFICIAL_MODEL_NAMES[canonical_name])
+    module = importlib.import_module(
+        OFFICIAL_MODEL_MODULES[canonical_name].removesuffix("._models")
+    )
+    alias = getattr(module, OFFICIAL_MODEL_NAMES[canonical_name])
     assert (
         alias == JsonValue
         if _expected_type(schema) == "JsonValue"

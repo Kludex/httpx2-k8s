@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import cast
 
 from httpx2_k8s import AsyncKubeClient, KubeClient
-from httpx2_k8s._official_models import OFFICIAL_MODEL_NAMES
+from httpx2_k8s._official_models import OFFICIAL_MODEL_MODULES, OFFICIAL_MODEL_NAMES
 from httpx2_k8s.operations import ASYNC_API_CLASSES, OFFICIAL_OPERATIONS, SYNC_API_CLASSES
 
 PROJECT_ROOT = Path(__file__).parents[1]
@@ -31,17 +31,17 @@ def _inventory() -> tuple[set[str], set[str]]:
 
 def verify_installed_wheel() -> None:
     official_operations, official_schemas = _inventory()
-    public_models = importlib.import_module("httpx2_k8s.models")
-
     if set(OFFICIAL_OPERATIONS) != official_operations:
         raise RuntimeError("Installed wheel operation inventory differs from pinned OpenAPI")
     if set(OFFICIAL_MODEL_NAMES) != official_schemas:
         raise RuntimeError("Installed wheel schema inventory differs from pinned OpenAPI")
-    if set(cast(list[str], public_models.__all__)) != set(OFFICIAL_MODEL_NAMES.values()):
-        raise RuntimeError("Installed wheel does not export every official model")
-
-    for model_name in OFFICIAL_MODEL_NAMES.values():
-        getattr(public_models, model_name)
+    for canonical_name, model_name in OFFICIAL_MODEL_NAMES.items():
+        module = importlib.import_module(
+            OFFICIAL_MODEL_MODULES[canonical_name].removesuffix("._models")
+        )
+        if model_name not in cast(list[str], module.__all__):
+            raise RuntimeError(f"Installed wheel does not export {model_name}")
+        getattr(module, model_name)
     for declaration in OFFICIAL_OPERATIONS.values():
         sync_method = getattr(SYNC_API_CLASSES[declaration.api], declaration.method_name)
         async_method = getattr(ASYNC_API_CLASSES[declaration.api], declaration.method_name)

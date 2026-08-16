@@ -9,7 +9,14 @@ import httpx2
 from httpx2_k8s._api import resource_name
 from httpx2_k8s._official_api import PatchContentType, iter_watch_response, query_parameters
 from httpx2_k8s._protocols import SyncKubeClientProtocol
-from httpx2_k8s.models import (
+from httpx2_k8s.apimachinery import (
+    MetaV1APIResourceList,
+    MetaV1DeleteOptions,
+    MetaV1Patch,
+    MetaV1Status,
+    MetaV1WatchEvent,
+)
+from httpx2_k8s.apps.v1._models import (
     AppsV1ControllerRevision,
     AppsV1ControllerRevisionList,
     AppsV1DaemonSet,
@@ -20,12 +27,9 @@ from httpx2_k8s.models import (
     AppsV1ReplicaSetList,
     AppsV1StatefulSet,
     AppsV1StatefulSetList,
+)
+from httpx2_k8s.autoscaling.v1._models import (
     AutoscalingV1Scale,
-    MetaV1APIResourceList,
-    MetaV1DeleteOptions,
-    MetaV1Patch,
-    MetaV1Status,
-    MetaV1WatchEvent,
 )
 
 

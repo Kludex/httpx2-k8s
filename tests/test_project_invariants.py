@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 import httpx2_k8s
+import httpx2_k8s.apps.v1 as apps_v1
 from httpx2_k8s import CustomResourceList
 
 PROJECT_ROOT = Path(__file__).parents[1]
@@ -69,6 +70,15 @@ def test_unknown_root_export_is_not_public() -> None:
         match="module 'httpx2_k8s' has no attribute 'MissingExport'",
     ):
         getattr(httpx2_k8s, name)
+
+
+def test_unknown_api_export_is_not_public() -> None:
+    name = "MissingExport"
+    with pytest.raises(
+        AttributeError,
+        match=r"module 'httpx2_k8s\.apps\.v1' has no attribute 'MissingExport'",
+    ):
+        getattr(apps_v1, name)
 
 
 def test_generic_custom_resource_lists_require_typed_items() -> None:

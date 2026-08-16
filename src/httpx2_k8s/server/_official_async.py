@@ -9,7 +9,7 @@ import httpx2
 from httpx2_k8s._api import resource_name
 from httpx2_k8s._official_api import PatchContentType, iter_async_watch_response, query_parameters
 from httpx2_k8s._protocols import AsyncKubeClientProtocol
-from httpx2_k8s.models import (
+from httpx2_k8s.apimachinery import (
     KubernetesInfo,
     MetaV1APIGroup,
     MetaV1APIGroupList,

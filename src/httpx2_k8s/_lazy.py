@@ -15,3 +15,18 @@ class LazyModule:
 
 def load_attribute(module_name: str, attribute_name: str) -> object:
     return getattr(import_module(module_name), attribute_name)
+
+
+def load_export(
+    name: str,
+    package_name: str,
+    namespace: dict[str, object],
+    imports: dict[str, str],
+) -> object:
+    try:
+        module_name = imports[name]
+    except KeyError as exc:
+        raise AttributeError(f"module {package_name!r} has no attribute {name!r}") from exc
+    value = load_attribute(module_name, name)
+    namespace[name] = value
+    return value

@@ -9,16 +9,18 @@ import httpx2
 from httpx2_k8s._api import resource_name
 from httpx2_k8s._official_api import PatchContentType, iter_watch_response, query_parameters
 from httpx2_k8s._protocols import SyncKubeClientProtocol
-from httpx2_k8s.models import (
-    CertificatesV1Alpha1ClusterTrustBundle,
-    CertificatesV1Alpha1ClusterTrustBundleList,
-    CertificatesV1Alpha1PodCertificateRequest,
-    CertificatesV1Alpha1PodCertificateRequestList,
+from httpx2_k8s.apimachinery import (
     MetaV1APIResourceList,
     MetaV1DeleteOptions,
     MetaV1Patch,
     MetaV1Status,
     MetaV1WatchEvent,
+)
+from httpx2_k8s.certificates.v1alpha1._models import (
+    CertificatesV1Alpha1ClusterTrustBundle,
+    CertificatesV1Alpha1ClusterTrustBundleList,
+    CertificatesV1Alpha1PodCertificateRequest,
+    CertificatesV1Alpha1PodCertificateRequestList,
 )
 
 

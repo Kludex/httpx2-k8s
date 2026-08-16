@@ -9,14 +9,16 @@ import httpx2
 from httpx2_k8s._api import resource_name
 from httpx2_k8s._official_api import PatchContentType, iter_async_watch_response, query_parameters
 from httpx2_k8s._protocols import AsyncKubeClientProtocol
-from httpx2_k8s.models import (
-    CoordinationV1Alpha2LeaseCandidate,
-    CoordinationV1Alpha2LeaseCandidateList,
+from httpx2_k8s.apimachinery import (
     MetaV1APIResourceList,
     MetaV1DeleteOptions,
     MetaV1Patch,
     MetaV1Status,
     MetaV1WatchEvent,
+)
+from httpx2_k8s.coordination.v1alpha2._models import (
+    CoordinationV1Alpha2LeaseCandidate,
+    CoordinationV1Alpha2LeaseCandidateList,
 )
 
 

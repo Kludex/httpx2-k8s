@@ -9,7 +9,7 @@ import httpx2
 from httpx2_k8s._api import resource_name
 from httpx2_k8s._official_api import PatchContentType, iter_async_watch_response, query_parameters
 from httpx2_k8s._protocols import AsyncKubeClientProtocol
-from httpx2_k8s.models import (
+from httpx2_k8s.admissionregistration.v1._models import (
     AdmissionRegistrationV1MutatingAdmissionPolicy,
     AdmissionRegistrationV1MutatingAdmissionPolicyBinding,
     AdmissionRegistrationV1MutatingAdmissionPolicyBindingList,
@@ -22,6 +22,8 @@ from httpx2_k8s.models import (
     AdmissionRegistrationV1ValidatingAdmissionPolicyList,
     AdmissionRegistrationV1ValidatingWebhookConfiguration,
     AdmissionRegistrationV1ValidatingWebhookConfigurationList,
+)
+from httpx2_k8s.apimachinery import (
     MetaV1APIResourceList,
     MetaV1DeleteOptions,
     MetaV1Patch,
