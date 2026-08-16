@@ -416,9 +416,6 @@ def _render(
             *(f"    {canonical!r}: {name}," for canonical, name in object_models.items()),
             "}",
             "",
-            "for _model in OFFICIAL_MODELS.values():",
-            "    _model.model_rebuild()",
-            "",
         ]
     )
     return "\n".join(lines)

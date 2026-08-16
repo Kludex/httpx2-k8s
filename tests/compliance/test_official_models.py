@@ -305,6 +305,7 @@ def test_official_model_fields_match_schema(
     schema: dict[str, object],
 ) -> None:
     model = OFFICIAL_MODELS[canonical_name]
+    model.model_rebuild()
     properties = cast(dict[str, dict[str, object]], schema.get("properties", {}))
     fields_by_alias = {field.alias: field for field in model.model_fields.values()}
     defaulted = {
@@ -354,6 +355,7 @@ def test_official_models_accept_and_round_trip_wire_examples(
     schema: dict[str, object],
 ) -> None:
     model = OFFICIAL_MODELS[canonical_name]
+    model.model_rebuild()
     instance = model.model_validate(_all_input(model))
     wire = instance.model_dump(mode="json", by_alias=True)
     round_trip = model.model_validate(wire)

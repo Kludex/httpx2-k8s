@@ -33,6 +33,7 @@ class KubeModel(BaseModel):
 
     model_config = ConfigDict(
         alias_generator=_to_camel,
+        defer_build=True,
         extra="allow",
         populate_by_name=True,
     )
