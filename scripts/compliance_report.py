@@ -314,6 +314,8 @@ def _version_report(manifest: Mapping[str, JsonValue]) -> VersionReport:
 
 
 def build_report() -> ComplianceReport:
+    for model in OFFICIAL_MODELS.values():
+        model.model_rebuild()
     manifests = tuple(
         _load_manifest(path) for path in sorted(OPENAPI_ROOT.glob("kubernetes-*.json.gz"))
     )

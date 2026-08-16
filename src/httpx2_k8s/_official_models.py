@@ -17946,6 +17946,3 @@ OFFICIAL_MODELS: dict[str, type[KubeModel]] = {
     "io.k8s.api.scheduling.v1alpha2.WorkloadSpec": SchedulingV1Alpha2WorkloadSpec,
     "io.k8s.apimachinery.pkg.apis.meta.v1.ShardInfo": MetaV1ShardInfo,
 }
-
-for _model in OFFICIAL_MODELS.values():
-    _model.model_rebuild()
