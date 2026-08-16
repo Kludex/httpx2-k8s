@@ -1,26 +1,15 @@
 from __future__ import annotations
 
-import asyncio
-import ssl
 from collections.abc import AsyncGenerator, AsyncIterator, Awaitable, Callable, Mapping, Sequence
 from contextlib import asynccontextmanager
 from pathlib import Path
 from types import TracebackType
-from typing import Self, TypeVar
-
-import httpx2
-from httpx2.websockets import WebSocketUpgradeError
-from pydantic import BaseModel
+from typing import TYPE_CHECKING, Self, TypeVar, cast
 
 from httpx2_k8s._client import DEFAULT_RETRY_POLICY
-from httpx2_k8s._config import (
-    ClientConfig,
-    load_in_cluster_config,
-    load_kubeconfig,
-    load_kubeconfig_yaml,
-)
 from httpx2_k8s._errors import APIError
-from httpx2_k8s._models import VersionInfo
+from httpx2_k8s._lazy import LazyModule
+from httpx2_k8s._lazy import load_attribute as _load_attribute
 from httpx2_k8s._official_clients import OfficialAsyncClientAPIs
 from httpx2_k8s._protocols import (
     AsyncWebSocketProtocol,
@@ -30,32 +19,46 @@ from httpx2_k8s._protocols import (
     serialize_request_body,
 )
 from httpx2_k8s._retry import RetryPolicy
-from httpx2_k8s._watch import (
-    ResourceT,
-    WatchBookmark,
-    WatchError,
-    WatchEvent,
-    WatchProtocolError,
-    decode_watch_line,
-)
-from httpx2_k8s.admissionregistration.v1 import AsyncAdmissionRegistrationV1API
-from httpx2_k8s.apps.v1 import AsyncAppsV1API
-from httpx2_k8s.autoscaling.v1 import AsyncAutoscalingV1API
-from httpx2_k8s.autoscaling.v2 import AsyncAutoscalingV2API
-from httpx2_k8s.batch.v1 import AsyncBatchV1API
-from httpx2_k8s.certificates.v1 import AsyncCertificatesV1API
-from httpx2_k8s.coordination.v1 import AsyncCoordinationV1API
-from httpx2_k8s.core.v1 import AsyncCoreV1API
-from httpx2_k8s.custom_objects import AsyncCustomObjectsAPI
-from httpx2_k8s.discovery import AsyncDiscoveryAPI
-from httpx2_k8s.discovery.v1 import AsyncDiscoveryV1API
-from httpx2_k8s.networking.v1 import AsyncNetworkingV1API
-from httpx2_k8s.policy.v1 import AsyncPolicyV1API
-from httpx2_k8s.rbac.v1 import AsyncRBACV1API
-from httpx2_k8s.scheduling.v1 import AsyncSchedulingV1API
-from httpx2_k8s.storage.v1 import AsyncStorageV1API
 
-ModelT = TypeVar("ModelT", bound=BaseModel)
+if TYPE_CHECKING:
+    import asyncio
+    import ssl
+
+    import httpx2
+    from httpx2.websockets import WebSocketUpgradeError
+    from pydantic import BaseModel
+
+    from httpx2_k8s._config import ClientConfig
+    from httpx2_k8s._models import VersionInfo
+    from httpx2_k8s._watch import (
+        ResourceT,
+        WatchBookmark,
+        WatchError,
+        WatchEvent,
+        WatchProtocolError,
+    )
+    from httpx2_k8s.admissionregistration.v1 import AsyncAdmissionRegistrationV1API
+    from httpx2_k8s.apps.v1 import AsyncAppsV1API
+    from httpx2_k8s.autoscaling.v1 import AsyncAutoscalingV1API
+    from httpx2_k8s.autoscaling.v2 import AsyncAutoscalingV2API
+    from httpx2_k8s.batch.v1 import AsyncBatchV1API
+    from httpx2_k8s.certificates.v1 import AsyncCertificatesV1API
+    from httpx2_k8s.coordination.v1 import AsyncCoordinationV1API
+    from httpx2_k8s.core.v1 import AsyncCoreV1API
+    from httpx2_k8s.custom_objects import AsyncCustomObjectsAPI
+    from httpx2_k8s.discovery import AsyncDiscoveryAPI
+    from httpx2_k8s.discovery.v1 import AsyncDiscoveryV1API
+    from httpx2_k8s.networking.v1 import AsyncNetworkingV1API
+    from httpx2_k8s.policy.v1 import AsyncPolicyV1API
+    from httpx2_k8s.rbac.v1 import AsyncRBACV1API
+    from httpx2_k8s.scheduling.v1 import AsyncSchedulingV1API
+    from httpx2_k8s.storage.v1 import AsyncStorageV1API
+else:
+    asyncio = LazyModule("asyncio")
+    httpx2 = LazyModule("httpx2")
+    ssl = LazyModule("ssl")
+
+ModelT = TypeVar("ModelT", bound="BaseModel")
 
 
 class AsyncKubeClient(OfficialAsyncClientAPIs):
@@ -139,8 +142,12 @@ class AsyncKubeClient(OfficialAsyncClientAPIs):
         retry_policy: RetryPolicy | None = DEFAULT_RETRY_POLICY,
     ) -> Self:
         """Create an async client from one or more kubeconfig files."""
+        loader = cast(
+            "Callable[..., ClientConfig]",
+            _load_attribute("httpx2_k8s._config", "load_kubeconfig"),
+        )
         return cls.from_config(
-            load_kubeconfig(path, context=context, exec_timeout=exec_timeout),
+            loader(path, context=context, exec_timeout=exec_timeout),
             timeout=timeout,
             transport=transport,
             retry_policy=retry_policy,
@@ -159,10 +166,12 @@ class AsyncKubeClient(OfficialAsyncClientAPIs):
         retry_policy: RetryPolicy | None = DEFAULT_RETRY_POLICY,
     ) -> Self:
         """Create an async client from kubeconfig YAML held in memory."""
+        loader = cast(
+            "Callable[..., ClientConfig]",
+            _load_attribute("httpx2_k8s._config", "load_kubeconfig_yaml"),
+        )
         return cls.from_config(
-            load_kubeconfig_yaml(
-                data, context=context, base_path=base_path, exec_timeout=exec_timeout
-            ),
+            loader(data, context=context, base_path=base_path, exec_timeout=exec_timeout),
             timeout=timeout,
             transport=transport,
             retry_policy=retry_policy,
@@ -179,11 +188,12 @@ class AsyncKubeClient(OfficialAsyncClientAPIs):
         retry_policy: RetryPolicy | None = DEFAULT_RETRY_POLICY,
     ) -> Self:
         """Create an async client from mounted service-account credentials."""
+        loader = cast(
+            "Callable[..., ClientConfig]",
+            _load_attribute("httpx2_k8s._config", "load_in_cluster_config"),
+        )
         return cls.from_config(
-            load_in_cluster_config(
-                service_account_path=service_account_path,
-                environ=environ,
-            ),
+            loader(service_account_path=service_account_path, environ=environ),
             timeout=timeout,
             transport=transport,
             retry_policy=retry_policy,
@@ -192,103 +202,171 @@ class AsyncKubeClient(OfficialAsyncClientAPIs):
     @property
     def autoscaling_v1(self) -> AsyncAutoscalingV1API:
         if self._autoscaling_v1 is None:
-            self._autoscaling_v1 = AsyncAutoscalingV1API(self)
+            api_type = cast(
+                "type[AsyncAutoscalingV1API]",
+                _load_attribute("httpx2_k8s.autoscaling.v1", "AsyncAutoscalingV1API"),
+            )
+            self._autoscaling_v1 = api_type(self)
         return self._autoscaling_v1
 
     @property
     def autoscaling_v2(self) -> AsyncAutoscalingV2API:
         if self._autoscaling_v2 is None:
-            self._autoscaling_v2 = AsyncAutoscalingV2API(self)
+            api_type = cast(
+                "type[AsyncAutoscalingV2API]",
+                _load_attribute("httpx2_k8s.autoscaling.v2", "AsyncAutoscalingV2API"),
+            )
+            self._autoscaling_v2 = api_type(self)
         return self._autoscaling_v2
 
     @property
     def apps_v1(self) -> AsyncAppsV1API:
         if self._apps_v1 is None:
-            self._apps_v1 = AsyncAppsV1API(self)
+            api_type = cast(
+                "type[AsyncAppsV1API]",
+                _load_attribute("httpx2_k8s.apps.v1", "AsyncAppsV1API"),
+            )
+            self._apps_v1 = api_type(self)
         return self._apps_v1
 
     @property
     def admissionregistration_v1(self) -> AsyncAdmissionRegistrationV1API:
         if self._admissionregistration_v1 is None:
-            self._admissionregistration_v1 = AsyncAdmissionRegistrationV1API(self)
+            api_type = cast(
+                "type[AsyncAdmissionRegistrationV1API]",
+                _load_attribute(
+                    "httpx2_k8s.admissionregistration.v1",
+                    "AsyncAdmissionRegistrationV1API",
+                ),
+            )
+            self._admissionregistration_v1 = api_type(self)
         return self._admissionregistration_v1
 
     @property
     def batch_v1(self) -> AsyncBatchV1API:
         if self._batch_v1 is None:
-            self._batch_v1 = AsyncBatchV1API(self)
+            api_type = cast(
+                "type[AsyncBatchV1API]",
+                _load_attribute("httpx2_k8s.batch.v1", "AsyncBatchV1API"),
+            )
+            self._batch_v1 = api_type(self)
         return self._batch_v1
 
     @property
     def certificates_v1(self) -> AsyncCertificatesV1API:
         if self._certificates_v1 is None:
-            self._certificates_v1 = AsyncCertificatesV1API(self)
+            api_type = cast(
+                "type[AsyncCertificatesV1API]",
+                _load_attribute("httpx2_k8s.certificates.v1", "AsyncCertificatesV1API"),
+            )
+            self._certificates_v1 = api_type(self)
         return self._certificates_v1
 
     @property
     def core_v1(self) -> AsyncCoreV1API:
         """Return the asynchronous Core v1 API facade."""
         if self._core_v1 is None:
-            self._core_v1 = AsyncCoreV1API(self)
+            api_type = cast(
+                "type[AsyncCoreV1API]",
+                _load_attribute("httpx2_k8s.core.v1", "AsyncCoreV1API"),
+            )
+            self._core_v1 = api_type(self)
         return self._core_v1
 
     @property
     def custom_objects(self) -> AsyncCustomObjectsAPI:
         if self._custom_objects is None:
-            self._custom_objects = AsyncCustomObjectsAPI(self)
+            api_type = cast(
+                "type[AsyncCustomObjectsAPI]",
+                _load_attribute("httpx2_k8s.custom_objects", "AsyncCustomObjectsAPI"),
+            )
+            self._custom_objects = api_type(self)
         return self._custom_objects
 
     @property
     def coordination_v1(self) -> AsyncCoordinationV1API:
         if self._coordination_v1 is None:
-            self._coordination_v1 = AsyncCoordinationV1API(self)
+            api_type = cast(
+                "type[AsyncCoordinationV1API]",
+                _load_attribute("httpx2_k8s.coordination.v1", "AsyncCoordinationV1API"),
+            )
+            self._coordination_v1 = api_type(self)
         return self._coordination_v1
 
     @property
     def discovery(self) -> AsyncDiscoveryAPI:
         if self._discovery is None:
-            self._discovery = AsyncDiscoveryAPI(self)
+            api_type = cast(
+                "type[AsyncDiscoveryAPI]",
+                _load_attribute("httpx2_k8s.discovery", "AsyncDiscoveryAPI"),
+            )
+            self._discovery = api_type(self)
         return self._discovery
 
     @property
     def discovery_v1(self) -> AsyncDiscoveryV1API:
         if self._discovery_v1 is None:
-            self._discovery_v1 = AsyncDiscoveryV1API(self)
+            api_type = cast(
+                "type[AsyncDiscoveryV1API]",
+                _load_attribute("httpx2_k8s.discovery.v1", "AsyncDiscoveryV1API"),
+            )
+            self._discovery_v1 = api_type(self)
         return self._discovery_v1
 
     @property
     def networking_v1(self) -> AsyncNetworkingV1API:
         if self._networking_v1 is None:
-            self._networking_v1 = AsyncNetworkingV1API(self)
+            api_type = cast(
+                "type[AsyncNetworkingV1API]",
+                _load_attribute("httpx2_k8s.networking.v1", "AsyncNetworkingV1API"),
+            )
+            self._networking_v1 = api_type(self)
         return self._networking_v1
 
     @property
     def policy_v1(self) -> AsyncPolicyV1API:
         if self._policy_v1 is None:
-            self._policy_v1 = AsyncPolicyV1API(self)
+            api_type = cast(
+                "type[AsyncPolicyV1API]",
+                _load_attribute("httpx2_k8s.policy.v1", "AsyncPolicyV1API"),
+            )
+            self._policy_v1 = api_type(self)
         return self._policy_v1
 
     @property
     def rbac_v1(self) -> AsyncRBACV1API:
         if self._rbac_v1 is None:
-            self._rbac_v1 = AsyncRBACV1API(self)
+            api_type = cast(
+                "type[AsyncRBACV1API]",
+                _load_attribute("httpx2_k8s.rbac.v1", "AsyncRBACV1API"),
+            )
+            self._rbac_v1 = api_type(self)
         return self._rbac_v1
 
     @property
     def scheduling_v1(self) -> AsyncSchedulingV1API:
         if self._scheduling_v1 is None:
-            self._scheduling_v1 = AsyncSchedulingV1API(self)
+            api_type = cast(
+                "type[AsyncSchedulingV1API]",
+                _load_attribute("httpx2_k8s.scheduling.v1", "AsyncSchedulingV1API"),
+            )
+            self._scheduling_v1 = api_type(self)
         return self._scheduling_v1
 
     @property
     def storage_v1(self) -> AsyncStorageV1API:
         if self._storage_v1 is None:
-            self._storage_v1 = AsyncStorageV1API(self)
+            api_type = cast(
+                "type[AsyncStorageV1API]",
+                _load_attribute("httpx2_k8s.storage.v1", "AsyncStorageV1API"),
+            )
+            self._storage_v1 = api_type(self)
         return self._storage_v1
 
     async def version(self) -> VersionInfo:
         """Return the Kubernetes API server version."""
-        return await self.request("GET", "/version", response_model=VersionInfo)
+        model = cast("type[VersionInfo]", _load_attribute("httpx2_k8s._models", "VersionInfo"))
+        return await self.request("GET", "/version", response_model=model)
 
     def _new_http_client(self) -> httpx2.AsyncClient:
         return httpx2.AsyncClient(
@@ -444,7 +522,10 @@ class AsyncKubeClient(OfficialAsyncClientAPIs):
                 timeout=timeout,
             ) as session:
                 yield session
-        except WebSocketUpgradeError as exc:
+        except cast(
+            "type[WebSocketUpgradeError]",
+            _load_attribute("httpx2.websockets", "WebSocketUpgradeError"),
+        ) as exc:
             raise APIError(exc.response) from exc
 
     def _dynamic_headers(self) -> dict[str, str] | None:
@@ -518,6 +599,17 @@ class AsyncKubeClient(OfficialAsyncClientAPIs):
         relist: Callable[[], Awaitable[WatchPage]] | None = None,
     ) -> AsyncIterator[WatchEvent[ResourceT] | WatchBookmark]:
         """Stream typed Kubernetes events with async reconnect and expiry recovery."""
+        decoder = cast(
+            "Callable[..., WatchEvent[ResourceT] | WatchBookmark]",
+            _load_attribute("httpx2_k8s._watch", "decode_watch_line"),
+        )
+        watch_error_type = cast(
+            "type[WatchError]", _load_attribute("httpx2_k8s._watch", "WatchError")
+        )
+        protocol_error_type = cast(
+            "type[WatchProtocolError]",
+            _load_attribute("httpx2_k8s._watch", "WatchProtocolError"),
+        )
         query = dict(params or {})
         query["watch"] = "true"
         query["allowWatchBookmarks"] = str(allow_bookmarks).lower()
@@ -555,15 +647,15 @@ class AsyncKubeClient(OfficialAsyncClientAPIs):
                             if not line:
                                 continue
                             try:
-                                event = decode_watch_line(line, response_model)
-                            except WatchError as exc:
+                                event = decoder(line, response_model)
+                            except watch_error_type as exc:
                                 if relist is None or (
                                     exc.status.code != 410 and exc.status.reason != "Expired"
                                 ):
                                     raise
                                 fresh_version = (await relist()).metadata.resource_version
                                 if not fresh_version:
-                                    raise WatchProtocolError(
+                                    raise protocol_error_type(
                                         "Relist response has no resourceVersion for watch recovery"
                                     ) from exc
                                 current_version = fresh_version
@@ -591,7 +683,7 @@ class AsyncKubeClient(OfficialAsyncClientAPIs):
                 return
             policy = self._retry_policy
             if policy is None or failures + 1 >= policy.max_attempts:
-                raise WatchProtocolError("Kubernetes watch stream closed repeatedly")
+                raise protocol_error_type("Kubernetes watch stream closed repeatedly")
             await asyncio.sleep(policy.delay(failures))
             failures += 1
 

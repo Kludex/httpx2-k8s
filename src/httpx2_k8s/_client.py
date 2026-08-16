@@ -1,25 +1,14 @@
 from __future__ import annotations
 
-import ssl
-import time
 from collections.abc import Callable, Generator, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from pathlib import Path
 from types import TracebackType
-from typing import Self, TypeVar
+from typing import TYPE_CHECKING, Self, TypeVar, cast
 
-import httpx2
-from httpx2.websockets import WebSocketUpgradeError
-from pydantic import BaseModel
-
-from httpx2_k8s._config import (
-    ClientConfig,
-    load_in_cluster_config,
-    load_kubeconfig,
-    load_kubeconfig_yaml,
-)
 from httpx2_k8s._errors import APIError
-from httpx2_k8s._models import VersionInfo
+from httpx2_k8s._lazy import LazyModule
+from httpx2_k8s._lazy import load_attribute as _load_attribute
 from httpx2_k8s._official_clients import OfficialSyncClientAPIs
 from httpx2_k8s._protocols import (
     QueryValue,
@@ -29,32 +18,46 @@ from httpx2_k8s._protocols import (
     serialize_request_body,
 )
 from httpx2_k8s._retry import RetryPolicy
-from httpx2_k8s._watch import (
-    ResourceT,
-    WatchBookmark,
-    WatchError,
-    WatchEvent,
-    WatchProtocolError,
-    decode_watch_line,
-)
-from httpx2_k8s.admissionregistration.v1 import AdmissionRegistrationV1API
-from httpx2_k8s.apps.v1 import AppsV1API
-from httpx2_k8s.autoscaling.v1 import AutoscalingV1API
-from httpx2_k8s.autoscaling.v2 import AutoscalingV2API
-from httpx2_k8s.batch.v1 import BatchV1API
-from httpx2_k8s.certificates.v1 import CertificatesV1API
-from httpx2_k8s.coordination.v1 import CoordinationV1API
-from httpx2_k8s.core.v1 import CoreV1API
-from httpx2_k8s.custom_objects import CustomObjectsAPI
-from httpx2_k8s.discovery import DiscoveryAPI
-from httpx2_k8s.discovery.v1 import DiscoveryV1API
-from httpx2_k8s.networking.v1 import NetworkingV1API
-from httpx2_k8s.policy.v1 import PolicyV1API
-from httpx2_k8s.rbac.v1 import RBACV1API
-from httpx2_k8s.scheduling.v1 import SchedulingV1API
-from httpx2_k8s.storage.v1 import StorageV1API
 
-ModelT = TypeVar("ModelT", bound=BaseModel)
+if TYPE_CHECKING:
+    import ssl
+    import time
+
+    import httpx2
+    from httpx2.websockets import WebSocketUpgradeError
+    from pydantic import BaseModel
+
+    from httpx2_k8s._config import ClientConfig
+    from httpx2_k8s._models import VersionInfo
+    from httpx2_k8s._watch import (
+        ResourceT,
+        WatchBookmark,
+        WatchError,
+        WatchEvent,
+        WatchProtocolError,
+    )
+    from httpx2_k8s.admissionregistration.v1 import AdmissionRegistrationV1API
+    from httpx2_k8s.apps.v1 import AppsV1API
+    from httpx2_k8s.autoscaling.v1 import AutoscalingV1API
+    from httpx2_k8s.autoscaling.v2 import AutoscalingV2API
+    from httpx2_k8s.batch.v1 import BatchV1API
+    from httpx2_k8s.certificates.v1 import CertificatesV1API
+    from httpx2_k8s.coordination.v1 import CoordinationV1API
+    from httpx2_k8s.core.v1 import CoreV1API
+    from httpx2_k8s.custom_objects import CustomObjectsAPI
+    from httpx2_k8s.discovery import DiscoveryAPI
+    from httpx2_k8s.discovery.v1 import DiscoveryV1API
+    from httpx2_k8s.networking.v1 import NetworkingV1API
+    from httpx2_k8s.policy.v1 import PolicyV1API
+    from httpx2_k8s.rbac.v1 import RBACV1API
+    from httpx2_k8s.scheduling.v1 import SchedulingV1API
+    from httpx2_k8s.storage.v1 import StorageV1API
+else:
+    httpx2 = LazyModule("httpx2")
+    ssl = LazyModule("ssl")
+    time = LazyModule("time")
+
+ModelT = TypeVar("ModelT", bound="BaseModel")
 DEFAULT_RETRY_POLICY = RetryPolicy()
 
 
@@ -139,8 +142,12 @@ class KubeClient(OfficialSyncClientAPIs):
         retry_policy: RetryPolicy | None = DEFAULT_RETRY_POLICY,
     ) -> Self:
         """Create a client from one or more kubeconfig files."""
+        loader = cast(
+            "Callable[..., ClientConfig]",
+            _load_attribute("httpx2_k8s._config", "load_kubeconfig"),
+        )
         return cls.from_config(
-            load_kubeconfig(path, context=context, exec_timeout=exec_timeout),
+            loader(path, context=context, exec_timeout=exec_timeout),
             timeout=timeout,
             transport=transport,
             retry_policy=retry_policy,
@@ -159,10 +166,12 @@ class KubeClient(OfficialSyncClientAPIs):
         retry_policy: RetryPolicy | None = DEFAULT_RETRY_POLICY,
     ) -> Self:
         """Create a client from kubeconfig YAML already held in memory."""
+        loader = cast(
+            "Callable[..., ClientConfig]",
+            _load_attribute("httpx2_k8s._config", "load_kubeconfig_yaml"),
+        )
         return cls.from_config(
-            load_kubeconfig_yaml(
-                data, context=context, base_path=base_path, exec_timeout=exec_timeout
-            ),
+            loader(data, context=context, base_path=base_path, exec_timeout=exec_timeout),
             timeout=timeout,
             transport=transport,
             retry_policy=retry_policy,
@@ -179,11 +188,12 @@ class KubeClient(OfficialSyncClientAPIs):
         retry_policy: RetryPolicy | None = DEFAULT_RETRY_POLICY,
     ) -> Self:
         """Create a client from a Pod's mounted service-account credentials."""
+        loader = cast(
+            "Callable[..., ClientConfig]",
+            _load_attribute("httpx2_k8s._config", "load_in_cluster_config"),
+        )
         return cls.from_config(
-            load_in_cluster_config(
-                service_account_path=service_account_path,
-                environ=environ,
-            ),
+            loader(service_account_path=service_account_path, environ=environ),
             timeout=timeout,
             transport=transport,
             retry_policy=retry_policy,
@@ -193,117 +203,171 @@ class KubeClient(OfficialSyncClientAPIs):
     def admissionregistration_v1(self) -> AdmissionRegistrationV1API:
         """Return the AdmissionRegistration v1 API facade."""
         if self._admissionregistration_v1 is None:
-            self._admissionregistration_v1 = AdmissionRegistrationV1API(self)
+            api_type = cast(
+                "type[AdmissionRegistrationV1API]",
+                _load_attribute(
+                    "httpx2_k8s.admissionregistration.v1", "AdmissionRegistrationV1API"
+                ),
+            )
+            self._admissionregistration_v1 = api_type(self)
         return self._admissionregistration_v1
 
     @property
     def certificates_v1(self) -> CertificatesV1API:
         """Return the Certificates v1 API facade."""
         if self._certificates_v1 is None:
-            self._certificates_v1 = CertificatesV1API(self)
+            api_type = cast(
+                "type[CertificatesV1API]",
+                _load_attribute("httpx2_k8s.certificates.v1", "CertificatesV1API"),
+            )
+            self._certificates_v1 = api_type(self)
         return self._certificates_v1
 
     @property
     def custom_objects(self) -> CustomObjectsAPI:
         """Return the generic typed and unstructured resource facade."""
         if self._custom_objects is None:
-            self._custom_objects = CustomObjectsAPI(self)
+            api_type = cast(
+                "type[CustomObjectsAPI]",
+                _load_attribute("httpx2_k8s.custom_objects", "CustomObjectsAPI"),
+            )
+            self._custom_objects = api_type(self)
         return self._custom_objects
 
     @property
     def apps_v1(self) -> AppsV1API:
         """Return the Apps v1 API facade."""
         if self._apps_v1 is None:
-            self._apps_v1 = AppsV1API(self)
+            api_type = cast("type[AppsV1API]", _load_attribute("httpx2_k8s.apps.v1", "AppsV1API"))
+            self._apps_v1 = api_type(self)
         return self._apps_v1
 
     @property
     def autoscaling_v1(self) -> AutoscalingV1API:
         """Return the Autoscaling v1 API facade."""
         if self._autoscaling_v1 is None:
-            self._autoscaling_v1 = AutoscalingV1API(self)
+            api_type = cast(
+                "type[AutoscalingV1API]",
+                _load_attribute("httpx2_k8s.autoscaling.v1", "AutoscalingV1API"),
+            )
+            self._autoscaling_v1 = api_type(self)
         return self._autoscaling_v1
 
     @property
     def autoscaling_v2(self) -> AutoscalingV2API:
         """Return the Autoscaling v2 API facade."""
         if self._autoscaling_v2 is None:
-            self._autoscaling_v2 = AutoscalingV2API(self)
+            api_type = cast(
+                "type[AutoscalingV2API]",
+                _load_attribute("httpx2_k8s.autoscaling.v2", "AutoscalingV2API"),
+            )
+            self._autoscaling_v2 = api_type(self)
         return self._autoscaling_v2
 
     @property
     def batch_v1(self) -> BatchV1API:
         """Return the Batch v1 API facade."""
         if self._batch_v1 is None:
-            self._batch_v1 = BatchV1API(self)
+            api_type = cast(
+                "type[BatchV1API]", _load_attribute("httpx2_k8s.batch.v1", "BatchV1API")
+            )
+            self._batch_v1 = api_type(self)
         return self._batch_v1
 
     @property
     def core_v1(self) -> CoreV1API:
         """Return the Core v1 API facade."""
         if self._core_v1 is None:
-            self._core_v1 = CoreV1API(self)
+            api_type = cast("type[CoreV1API]", _load_attribute("httpx2_k8s.core.v1", "CoreV1API"))
+            self._core_v1 = api_type(self)
         return self._core_v1
 
     @property
     def coordination_v1(self) -> CoordinationV1API:
         """Return the Coordination v1 API facade."""
         if self._coordination_v1 is None:
-            self._coordination_v1 = CoordinationV1API(self)
+            api_type = cast(
+                "type[CoordinationV1API]",
+                _load_attribute("httpx2_k8s.coordination.v1", "CoordinationV1API"),
+            )
+            self._coordination_v1 = api_type(self)
         return self._coordination_v1
 
     @property
     def discovery(self) -> DiscoveryAPI:
         """Return the Kubernetes API and OpenAPI discovery facade."""
         if self._discovery is None:
-            self._discovery = DiscoveryAPI(self)
+            api_type = cast(
+                "type[DiscoveryAPI]", _load_attribute("httpx2_k8s.discovery", "DiscoveryAPI")
+            )
+            self._discovery = api_type(self)
         return self._discovery
 
     @property
     def discovery_v1(self) -> DiscoveryV1API:
         """Return the Discovery v1 API facade."""
         if self._discovery_v1 is None:
-            self._discovery_v1 = DiscoveryV1API(self)
+            api_type = cast(
+                "type[DiscoveryV1API]",
+                _load_attribute("httpx2_k8s.discovery.v1", "DiscoveryV1API"),
+            )
+            self._discovery_v1 = api_type(self)
         return self._discovery_v1
 
     @property
     def networking_v1(self) -> NetworkingV1API:
         """Return the Networking v1 API facade."""
         if self._networking_v1 is None:
-            self._networking_v1 = NetworkingV1API(self)
+            api_type = cast(
+                "type[NetworkingV1API]",
+                _load_attribute("httpx2_k8s.networking.v1", "NetworkingV1API"),
+            )
+            self._networking_v1 = api_type(self)
         return self._networking_v1
 
     @property
     def policy_v1(self) -> PolicyV1API:
         """Return the Policy v1 API facade."""
         if self._policy_v1 is None:
-            self._policy_v1 = PolicyV1API(self)
+            api_type = cast(
+                "type[PolicyV1API]", _load_attribute("httpx2_k8s.policy.v1", "PolicyV1API")
+            )
+            self._policy_v1 = api_type(self)
         return self._policy_v1
 
     @property
     def rbac_v1(self) -> RBACV1API:
         """Return the RBAC v1 API facade."""
         if self._rbac_v1 is None:
-            self._rbac_v1 = RBACV1API(self)
+            api_type = cast("type[RBACV1API]", _load_attribute("httpx2_k8s.rbac.v1", "RBACV1API"))
+            self._rbac_v1 = api_type(self)
         return self._rbac_v1
 
     @property
     def scheduling_v1(self) -> SchedulingV1API:
         """Return the Scheduling v1 API facade."""
         if self._scheduling_v1 is None:
-            self._scheduling_v1 = SchedulingV1API(self)
+            api_type = cast(
+                "type[SchedulingV1API]",
+                _load_attribute("httpx2_k8s.scheduling.v1", "SchedulingV1API"),
+            )
+            self._scheduling_v1 = api_type(self)
         return self._scheduling_v1
 
     @property
     def storage_v1(self) -> StorageV1API:
         """Return the Storage v1 API facade."""
         if self._storage_v1 is None:
-            self._storage_v1 = StorageV1API(self)
+            api_type = cast(
+                "type[StorageV1API]", _load_attribute("httpx2_k8s.storage.v1", "StorageV1API")
+            )
+            self._storage_v1 = api_type(self)
         return self._storage_v1
 
     def version(self) -> VersionInfo:
         """Return the Kubernetes API server version."""
-        return self.request("GET", "/version", response_model=VersionInfo)
+        model = cast("type[VersionInfo]", _load_attribute("httpx2_k8s._models", "VersionInfo"))
+        return self.request("GET", "/version", response_model=model)
 
     def _new_http_client(self) -> httpx2.Client:
         return httpx2.Client(
@@ -464,7 +528,10 @@ class KubeClient(OfficialSyncClientAPIs):
                 timeout=timeout,
             ) as session:
                 yield session
-        except WebSocketUpgradeError as exc:
+        except cast(
+            "type[WebSocketUpgradeError]",
+            _load_attribute("httpx2.websockets", "WebSocketUpgradeError"),
+        ) as exc:
             raise APIError(exc.response) from exc
 
     def _request_response(
@@ -533,6 +600,17 @@ class KubeClient(OfficialSyncClientAPIs):
         relist: Callable[[], WatchPage] | None = None,
     ) -> Iterator[WatchEvent[ResourceT] | WatchBookmark]:
         """Stream typed Kubernetes events, reconnecting and recovering expired versions."""
+        decoder = cast(
+            "Callable[..., WatchEvent[ResourceT] | WatchBookmark]",
+            _load_attribute("httpx2_k8s._watch", "decode_watch_line"),
+        )
+        watch_error_type = cast(
+            "type[WatchError]", _load_attribute("httpx2_k8s._watch", "WatchError")
+        )
+        protocol_error_type = cast(
+            "type[WatchProtocolError]",
+            _load_attribute("httpx2_k8s._watch", "WatchProtocolError"),
+        )
         query = dict(params or {})
         query["watch"] = "true"
         query["allowWatchBookmarks"] = str(allow_bookmarks).lower()
@@ -569,15 +647,15 @@ class KubeClient(OfficialSyncClientAPIs):
                             if not line:
                                 continue
                             try:
-                                event = decode_watch_line(line, response_model)
-                            except WatchError as exc:
+                                event = decoder(line, response_model)
+                            except watch_error_type as exc:
                                 if relist is None or (
                                     exc.status.code != 410 and exc.status.reason != "Expired"
                                 ):
                                     raise
                                 fresh_version = relist().metadata.resource_version
                                 if not fresh_version:
-                                    raise WatchProtocolError(
+                                    raise protocol_error_type(
                                         "Relist response has no resourceVersion for watch recovery"
                                     ) from exc
                                 current_version = fresh_version
@@ -605,7 +683,7 @@ class KubeClient(OfficialSyncClientAPIs):
                 return
             policy = self._retry_policy
             if policy is None or failures + 1 >= policy.max_attempts:
-                raise WatchProtocolError("Kubernetes watch stream closed repeatedly")
+                raise protocol_error_type("Kubernetes watch stream closed repeatedly")
             time.sleep(policy.delay(failures))
             failures += 1
 

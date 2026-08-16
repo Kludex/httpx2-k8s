@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+import httpx2_k8s
 from httpx2_k8s import CustomResourceList
 
 PROJECT_ROOT = Path(__file__).parents[1]
@@ -55,6 +56,19 @@ def test_forbidden_typing_and_async_patterns_are_absent() -> None:
     assert "RootModel" not in source
     assert "asyncio.run(" not in "\n".join(path.read_text() for path in SCANNED_TEST_FILES)
     assert "pyrefly: ignore" not in source
+
+
+def test_root_exports_are_discoverable() -> None:
+    assert set(httpx2_k8s.__all__) <= set(dir(httpx2_k8s))
+
+
+def test_unknown_root_export_is_not_public() -> None:
+    name = "MissingExport"
+    with pytest.raises(
+        AttributeError,
+        match="module 'httpx2_k8s' has no attribute 'MissingExport'",
+    ):
+        getattr(httpx2_k8s, name)
 
 
 def test_generic_custom_resource_lists_require_typed_items() -> None:

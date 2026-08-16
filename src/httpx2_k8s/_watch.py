@@ -2,13 +2,22 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from typing import Generic, Literal, TypeVar, cast
+from functools import cache
+from typing import TYPE_CHECKING, Generic, Literal, TypeVar, cast
 
-from pydantic import BaseModel, JsonValue, ValidationError
+from httpx2_k8s._lazy import load_attribute
 
-from httpx2_k8s._models import Status
+if TYPE_CHECKING:
+    from pydantic import BaseModel, JsonValue
 
-ResourceT = TypeVar("ResourceT", bound=BaseModel)
+    from httpx2_k8s._models import Status
+
+ResourceT = TypeVar("ResourceT", bound="BaseModel")
+
+
+@cache
+def _validation_error_type() -> type[ValueError]:
+    return cast(type[ValueError], load_attribute("pydantic", "ValidationError"))
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,11 +70,12 @@ def decode_watch_line(
     if not isinstance(raw, dict) or not isinstance(raw.get("type"), str) or "object" not in raw:
         raise WatchProtocolError("Kubernetes watch event has an invalid envelope")
     event_type = raw["type"]
-    raw_object: JsonValue = cast(JsonValue, raw["object"])
+    raw_object: JsonValue = cast("JsonValue", raw["object"])
     if event_type == "ERROR":
+        status_type = cast("type[Status]", load_attribute("httpx2_k8s._models", "Status"))
         try:
-            status = Status.model_validate(raw_object)
-        except ValidationError as exc:
+            status = status_type.model_validate(raw_object)
+        except _validation_error_type() as exc:
             raise WatchProtocolError("Kubernetes watch ERROR event has an invalid Status") from exc
         raise WatchError(status)
     resource_version = _resource_version(raw_object)
@@ -77,7 +87,7 @@ def decode_watch_line(
         raise WatchProtocolError(f"Kubernetes watch returned unknown event type {event_type!r}")
     try:
         resource = response_model.model_validate(raw_object)
-    except ValidationError as exc:
+    except _validation_error_type() as exc:
         raise WatchProtocolError("Kubernetes watch event object failed validation") from exc
     return WatchEvent(
         cast(Literal["ADDED", "MODIFIED", "DELETED"], event_type), resource, resource_version

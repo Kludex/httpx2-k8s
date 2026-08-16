@@ -2,10 +2,18 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
-from email.utils import parsedate_to_datetime
+from typing import TYPE_CHECKING
 
-import httpx2
+from httpx2_k8s._lazy import LazyModule
+
+if TYPE_CHECKING:
+    import datetime as datetime_module
+    import email.utils as email_utils
+
+    import httpx2
+else:
+    datetime_module = LazyModule("datetime")
+    email_utils = LazyModule("email.utils")
 
 
 @dataclass(frozen=True, slots=True)
@@ -56,10 +64,13 @@ class RetryPolicy:
             seconds = int(value)
         except ValueError:
             try:
-                when: datetime = parsedate_to_datetime(value)
+                when: datetime_module.datetime = email_utils.parsedate_to_datetime(value)
             except (TypeError, ValueError, OverflowError):
                 return None
             if when.tzinfo is None:
-                when = when.replace(tzinfo=UTC)
-            return max(0.0, (when - datetime.now(UTC)).total_seconds())
+                when = when.replace(tzinfo=datetime_module.UTC)
+            return max(
+                0.0,
+                (when - datetime_module.datetime.now(datetime_module.UTC)).total_seconds(),
+            )
         return float(max(0, seconds))

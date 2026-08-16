@@ -11,6 +11,7 @@ from typing import Annotated, Literal, Union, cast, get_args, get_origin
 import pytest
 from pydantic import BaseModel, JsonValue
 
+import httpx2_k8s._official_models as official_models
 import httpx2_k8s.models as public_models
 from httpx2_k8s._models import KubeModel
 from httpx2_k8s._official_models import (
@@ -296,7 +297,17 @@ def test_official_object_registry_has_every_object_schema() -> None:
 def test_every_official_model_is_public() -> None:
     expected = set(OFFICIAL_MODEL_NAMES.values())
     assert set(public_models.__all__) == expected
-    assert expected <= vars(public_models).keys()
+    assert expected <= set(dir(public_models))
+    assert all(getattr(public_models, name) is getattr(official_models, name) for name in expected)
+
+
+def test_unknown_official_model_is_not_public() -> None:
+    name = "MissingModel"
+    with pytest.raises(
+        AttributeError,
+        match=r"module 'httpx2_k8s\.models' has no attribute 'MissingModel'",
+    ):
+        getattr(public_models, name)
 
 
 @pytest.mark.parametrize(("canonical_name", "schema"), OBJECT_CASES)
@@ -369,7 +380,7 @@ def test_official_type_alias_matches_schema(
     canonical_name: str,
     schema: dict[str, object],
 ) -> None:
-    alias = vars(public_models)[OFFICIAL_MODEL_NAMES[canonical_name]]
+    alias = getattr(public_models, OFFICIAL_MODEL_NAMES[canonical_name])
     assert (
         alias == JsonValue
         if _expected_type(schema) == "JsonValue"

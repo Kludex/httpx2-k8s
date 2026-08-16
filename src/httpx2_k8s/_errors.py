@@ -1,8 +1,15 @@
 from __future__ import annotations
 
-import httpx2
+from typing import TYPE_CHECKING, cast
 
-from httpx2_k8s._models import Status
+from httpx2_k8s._lazy import LazyModule, load_attribute
+
+if TYPE_CHECKING:
+    import httpx2
+
+    from httpx2_k8s._models import Status
+else:
+    httpx2 = LazyModule("httpx2")
 
 
 class APIError(Exception):
@@ -12,8 +19,9 @@ class APIError(Exception):
         self.status_code = response.status_code
         self.response = response
         self.status: Status | None
+        status_type = cast("type[Status]", load_attribute("httpx2_k8s._models", "Status"))
         try:
-            self.status = Status.model_validate_json(response.content)
+            self.status = status_type.model_validate_json(response.content)
         except (ValueError, httpx2.ResponseNotRead):
             self.status = None
 

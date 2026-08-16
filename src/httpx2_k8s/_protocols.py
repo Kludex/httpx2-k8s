@@ -2,16 +2,20 @@ from __future__ import annotations
 
 from collections.abc import AsyncIterator, Awaitable, Callable, Iterator, Mapping
 from contextlib import AbstractAsyncContextManager, AbstractContextManager
-from typing import Protocol, TypeAlias, TypeVar, runtime_checkable
+from functools import cache
+from typing import TYPE_CHECKING, Protocol, TypeAlias, TypeVar, cast, runtime_checkable
 
-import httpx2
-from pydantic import BaseModel, JsonValue, TypeAdapter
+from httpx2_k8s._lazy import load_attribute
 
-from httpx2_k8s._models import ListMeta
-from httpx2_k8s._watch import WatchBookmark, WatchEvent
+if TYPE_CHECKING:
+    import httpx2
+    from pydantic import BaseModel, JsonValue, TypeAdapter
 
-ModelT = TypeVar("ModelT", bound=BaseModel)
-ResourceT = TypeVar("ResourceT", bound=BaseModel)
+    from httpx2_k8s._models import ListMeta
+    from httpx2_k8s._watch import WatchBookmark, WatchEvent
+
+ModelT = TypeVar("ModelT", bound="BaseModel")
+ResourceT = TypeVar("ResourceT", bound="BaseModel")
 QueryValue: TypeAlias = str | int | bool
 
 
@@ -20,15 +24,24 @@ class WireBody(Protocol):
     def wire_json(self) -> bytes: ...
 
 
-RequestBody: TypeAlias = WireBody | JsonValue
-_JSON_VALUE_ADAPTER = TypeAdapter(JsonValue)
+if TYPE_CHECKING:
+    RequestBody: TypeAlias = WireBody | JsonValue
+else:
+    RequestBody: TypeAlias = object
+
+
+@cache
+def _json_value_adapter() -> TypeAdapter[JsonValue]:
+    adapter_type = cast("type[TypeAdapter[JsonValue]]", load_attribute("pydantic", "TypeAdapter"))
+    json_value = load_attribute("pydantic", "JsonValue")
+    return adapter_type(json_value)
 
 
 def serialize_request_body(body: RequestBody) -> bytes:
     """Serialize typed models and officially free-form JSON patch bodies."""
     if isinstance(body, WireBody):
         return body.wire_json()
-    return _JSON_VALUE_ADAPTER.dump_json(body)
+    return _json_value_adapter().dump_json(body)
 
 
 class WatchPage(Protocol):
